@@ -171,7 +171,7 @@ export function Projects() {
         ))}
       </div>
 
-      <div className={styles.viewAll}>
+      <div className={styles.viewAll} onClick={() => navigate('/projects')} style={{ cursor: 'pointer' }}>
         <div className={styles.viewAllContent}>
           <h2 className={styles.viewAllTitle}>Посмотрите все наши проекты</h2>
           <img className={styles.viewAllArrow} src="/arrow-right.svg" alt="" aria-hidden="true" />
