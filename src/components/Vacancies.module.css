@@ -1,0 +1,69 @@
+.vacancies {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5.25rem 0 0;
+  box-sizing: border-box;
+  background: #f6f6f6;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #202020;
+  margin: 5rem 0;
+}
+
+.content {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 2.5rem;
+}
+
+.titleTop {
+  margin: 0;
+  padding-left: 10.9%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #202020;
+}
+
+.titleHighlighted {
+  margin: 0;
+  padding-left: 18.75%;
+  font-family: 'Vasek', sans-serif;
+  font-size: 8rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+  color: #EA5657;
+}
+
+.titleBottom {
+  margin: 0;
+  padding-left: 26.7%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #202020;
+}
+
+.vacanciesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  margin-top: 3rem;
+}

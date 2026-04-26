@@ -1,0 +1,234 @@
+.hallOfFame {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5.25rem 0;
+  box-sizing: border-box;
+  background: #f6f6f6;
+}
+
+.content {
+  width: 100%;
+  max-width: 90rem;
+  padding: 2.5rem;
+  box-sizing: border-box;
+}
+
+.textBlock {
+  padding: 7.5rem 2.5rem 7.5rem 0;
+  margin-bottom: 5rem;
+}
+
+.title {
+  text-align: left;
+  margin: 0 0 0.5rem;
+  padding-left: 10.9%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #202020;
+}
+
+.highlightedTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  margin: 0;
+  padding-left: 18.75%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  color: #202020;
+}
+
+.highlightedTitle span {
+  color: #EA5657;
+  font-family: 'Vasek', sans-serif;
+  font-style: italic;
+  font-size: 8rem;
+}
+
+.starIcon {
+  width: 8rem;
+  height: 8rem;
+  margin-left: 0.5rem;
+}
+
+.subtitle {
+  text-align: left;
+  margin: 0.5rem 0 0;
+  padding-left: 26.7%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #202020;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.sliderArrowLeft,
+.sliderArrowRight {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: #202020;
+  cursor: pointer;
+  padding: 1.25rem;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.sliderArrowLeft:hover,
+.sliderArrowRight:hover {
+  opacity: 0.7;
+}
+
+.starsWrapper {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.starsContainer {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 2.5rem 0;
+}
+
+.noTransition {
+  transition: none !important;
+}
+
+.star {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 15rem;
+  height: 20rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.starImage {
+  display: block;
+  width: 15rem;
+  height: 15rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.starShine {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15rem;
+  height: 14rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.starAvatar {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 3;
+}
+
+.avatarWrapper {
+  position: absolute;
+  top: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.avatarStroke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 6.75rem;
+  height: 6.75rem;
+  z-index: 1;
+}
+
+.starBig {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+.starSmall {
+  transform: scale(0.6);
+  opacity: 0.6;
+}
+
+.starBlur {
+  opacity: 0.3;
+  filter: blur(4px);
+  transform: scale(0.4);
+}
+
+.starEdge {
+  opacity: 0.5;
+}
+
+.starLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.starLabelTop {
+  font-family: 'Vasek', sans-serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #202020;
+}
+
+.starLabelBottom {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #EA5657;
+}
+
+.starLabelSmall {
+  font-family: 'Vasek', sans-serif;
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #202020;
+  margin-top: 0.5rem;
+}

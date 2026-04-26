@@ -1,0 +1,245 @@
+.vacancies {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7rem 0 5.25rem;
+  box-sizing: border-box;
+  background: #f6f6f6;
+  min-height: calc(100vh - 7rem);
+}
+
+.content {
+  width: 1442px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  box-sizing: border-box;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.titleTop {
+  margin: 0;
+  padding-left: 10.9%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #202020;
+}
+
+.titleHighlighted {
+  margin: 0;
+  padding-left: 18.75%;
+  font-family: 'Vasek', sans-serif;
+  font-size: 8rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+  color: #EA5657;
+}
+
+.titleBottom {
+  margin: 0;
+  padding-left: 26.7%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #202020;
+}
+
+.filterBlock {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  display: flex;
+  padding: 60px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  border: 1px solid #202020;
+  border-bottom: none;
+  box-sizing: border-box;
+}
+
+.searchSection {
+  display: flex;
+  align-items: center;
+  gap: 115px;
+  width: 100%;
+  justify-content: center;
+}
+
+.searchInput {
+  display: flex;
+  width: 670px;
+  padding: 16px 24px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 61px;
+  border: 1px solid #D9D9D9;
+  box-sizing: border-box;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #202020;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input::placeholder {
+  color: #858585;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.filterButtons {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.filterButton {
+  display: flex;
+  width: 49px;
+  height: 49px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 62px;
+  border: 1px solid #D9D9D9;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filterButton:hover {
+  border-color: #202020;
+}
+
+.filterButton img {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.tagsContainer {
+  display: flex;
+  width: 900px;
+  align-items: center;
+  align-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tag {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #D9D9D9;
+  background: transparent;
+  color: #202020;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  border-color: #202020;
+}
+
+.tagActive {
+  background: #EA5657;
+  border-color: #EA5657;
+  color: #F6F6F6;
+}
+
+.vacanciesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  gap: 0;
+}
+
+.backToTopContainer {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+  border-top: 1px solid #202020;
+}
+
+.backToTopButton {
+  width: 202px;
+  height: 113px;
+  border: none;
+  background: transparent;
+  color: #EA5657;
+  text-align: center;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.backToTopButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 202px;
+  height: 113px;
+  background: url('/naetomvse.svg') no-repeat;
+  background-size: contain;
+  background-position: center;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.backToTopButton:hover {
+  background: #EA5657;
+  color: #F6F6F6;
+}

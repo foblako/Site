@@ -1,0 +1,181 @@
+.directions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5.25rem 0;
+  box-sizing: border-box;
+  background: #f6f6f6;
+}
+
+.content {
+  width: 100%;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  box-sizing: border-box;
+  background: #202020;
+  border-radius: 2.5rem;
+  overflow: hidden;
+}
+
+.textBlock {
+  padding: 7.5rem 2.5rem 7.5rem 0;
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  text-align: left;
+  margin: 2.5rem 0 0.5rem;
+  padding-left: 10.9%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+}
+
+.highlightedTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  margin: 0;
+  padding-left: 18.75%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  color: #F6F6F6;
+}
+
+.highlightedTitle span {
+  color: #EA5657;
+  font-family: 'Vasek', sans-serif;
+  font-style: italic;
+  font-size: 8rem;
+}
+
+.letterY {
+  width: 8rem;
+  height: 8rem;
+  margin: 0 0.5rem;
+}
+
+.subtitle {
+  text-align: left;
+  margin: 0.5rem 0 5rem;
+  padding-left: 26.7%;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0 -2.6875rem;
+}
+
+.listItem {
+  display: flex;
+  width: 100%;
+  padding: 1.875rem 2.6875rem;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #F6F6F6;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.listLeft {
+  display: flex;
+  align-items: center;
+}
+
+.listSlash {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+}
+
+.listName {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+  margin-left: 6.0625rem;
+}
+
+.listRight {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.listTech {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+}
+
+.listArrow {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  margin-left: 6.0625rem;
+}
+
+.listItemLast {
+  display: flex;
+  width: 100%;
+  padding: 1.875rem 2.6875rem;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  box-sizing: border-box;
+  background-color: #EA5657;
+  border-radius: 0 0 2.5rem 2.5rem;
+  margin-bottom: -2.5rem;
+}
+
+.listItemLast .listLeft {
+  display: flex;
+  align-items: center;
+}
+
+.listItemLast .listSlash {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+}
+
+.listItemLast .listText {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #F6F6F6;
+  margin-left: 6.0625rem;
+}
+
+.listItemLast .listArrow {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  margin-left: 6.0625rem;
+}
