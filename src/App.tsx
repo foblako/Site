@@ -11,7 +11,7 @@ import { Contacts } from './components/Contacts'
 import { Portfolio } from './pages/Portfolio'
 import { Project } from './pages/Project'
 import { Vacancies } from './pages/Vacancies'
-import { Projects } from './pages/Projects'
+import { Projects as ProjectsPage } from './pages/Projects'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -45,6 +45,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/portfolio" element={<><Header showPortfolioTitle /><Portfolio /></>} />
         <Route path="/vacancies" element={<><Header showPortfolioTitle /><Vacancies /></>} />
+        <Route path="/projects" element={<><Header showPortfolioTitle /><ProjectsPage /></>} />
         <Route path="/project/:id" element={<><Header showPortfolioTitle /><Project /></>} />
       </Routes>
     </BrowserRouter>

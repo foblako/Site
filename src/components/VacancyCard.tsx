@@ -11,15 +11,8 @@ type VacancyCardProps = {
   total: number
 }
 
-export function VacancyCard({
-  title,
-  description,
-  tags,
-  responsibilities,
-  responsibilitiesList,
-  index,
-  total,
-}: VacancyCardProps) {
+export function VacancyCard(props: VacancyCardProps) {
+  const { title, description, tags, responsibilities, responsibilitiesList, index } = props
   const [isApplied, setIsApplied] = useState(false)
 
   const handleApply = () => {

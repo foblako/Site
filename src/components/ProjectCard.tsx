@@ -15,19 +15,8 @@ type ProjectCardProps = {
   total: number
 }
 
-export function ProjectCard({
-  id,
-  title,
-  description,
-  tags,
-  status,
-  statusIcon,
-  likes,
-  comments,
-  participants,
-  index,
-  total,
-}: ProjectCardProps) {
+export function ProjectCard(props: ProjectCardProps) {
+  const { title, description, tags, status, statusIcon, likes, comments, participants, index } = props
   const [isFavorite, setIsFavorite] = useState(false)
 
   const handleFavorite = () => {
