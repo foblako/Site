@@ -1,26 +1,38 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { STARS } from '../data/hallOfFame'
 import styles from './HallOfFame.module.css'
 
+function mod(n: number, m: number) {
+  return ((n % m) + m) % m
+}
+
+const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)'
+const DURATION = '0.5s'
+
 export function HallOfFame() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [skipIds, setSkipIds] = useState<Set<number>>(new Set())
 
-  const gap = 6 * window.devicePixelRatio
+  useEffect(() => {
+    if (skipIds.size > 0) {
+      const id = setTimeout(() => setSkipIds(new Set()), 50)
+      return () => clearTimeout(id)
+    }
+  }, [skipIds])
 
-  const scrollLeft = () => {
-    setActiveIndex(prev => (prev === 0 ? STARS.length - 1 : prev - 1))
+  const slide = (direction: number) => {
+    const wrappingIdx = mod(activeIndex - direction * 2, STARS.length)
+    setSkipIds(new Set([STARS[wrappingIdx].id]))
+    setActiveIndex(prev => mod(prev + direction, STARS.length))
   }
 
-  const scrollRight = () => {
-    setActiveIndex(prev => (prev === STARS.length - 1 ? 0 : prev + 1))
+  const getOffset = (starIndex: number): number => {
+    let diff = starIndex - activeIndex
+    const n = STARS.length
+    if (diff > n / 2) diff -= n
+    if (diff < -n / 2) diff += n
+    return diff
   }
-
-  const visibleStars = useMemo(() => {
-    return Array.from({ length: 5 }, (_, i) =>
-      STARS[(activeIndex + i) % STARS.length]
-    )
-  }, [activeIndex])
 
   return (
     <section className={styles.hallOfFame} aria-label="Аллея Славы">
@@ -37,57 +49,58 @@ export function HallOfFame() {
         <div className={styles.slider}>
           <button
             className={styles.sliderArrowLeft}
-            onClick={scrollLeft}
+            onClick={() => slide(-1)}
             aria-label="Предыдущий"
           >
             ←
           </button>
 
           <div className={styles.starsWrapper}>
-            <div
-              ref={containerRef}
-              className={styles.starsContainer}
-              style={{
-                transform: `translateX(-${activeIndex * gap}px)`,
-                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}
-            >
-              {visibleStars.map((star, index) => {
-                const displayIndex = (activeIndex + index) % STARS.length
-                const isCenter = displayIndex === 0
-                const isLeft = displayIndex === 4
-                const isRight = displayIndex === 1
-                const isEdge = displayIndex === 3 || displayIndex === 2
+            <div className={styles.starsContainer}>
+              {STARS.map((star, index) => {
+                const offset = getOffset(index)
+                const isCenter = offset === 0
+                const absOffset = Math.abs(offset)
+                const scale = isCenter ? 1 : absOffset === 1 ? 0.65 : 0.45
+                const skip = skipIds.has(star.id)
+                const normalOpacity = isCenter ? 1 : absOffset === 1 ? 0.6 : 0.3
+                const transition = skip
+                  ? 'none'
+                  : `transform ${DURATION} ${EASING}, opacity ${DURATION} ${EASING}, filter ${DURATION} ${EASING}`
 
                 return (
                   <div
-                    key={`${star.id}-${displayIndex}`}
-                    className={`${styles.star} ${
-                      isCenter ? styles.starBig :
-                      isLeft || isRight ? styles.starSmall :
-                      styles.starBlur
-                    } ${isEdge ? styles.starEdge : ''}`}
+                    key={star.id}
+                    className={styles.starItem}
+                    style={{
+                      transform: `translateX(calc(-50% + ${offset * 16}rem)) scale(${scale})`,
+                      opacity: skip ? 0 : normalOpacity,
+                      filter: absOffset >= 2 ? 'blur(4px)' : 'none',
+                      zIndex: isCenter ? 3 : absOffset === 1 ? 2 : 1,
+                      transition,
+                    }}
                   >
                     <img src="/BigStar.svg" alt="" className={styles.starImage} />
-                    {isCenter && (
-                      <img
-                        src="/CenterStarShine.svg"
-                        alt=""
-                        className={styles.starShine}
-                        aria-hidden="true"
-                      />
-                    )}
+                    <img
+                      src="/CenterStarShine.svg"
+                      alt=""
+                      className={styles.starShine}
+                      style={{ opacity: isCenter ? 1 : 0 }}
+                      aria-hidden="true"
+                    />
                     <div className={styles.avatarWrapper}>
                       <img src={star.avatar} alt={star.name} className={styles.starAvatar} />
                       <img className={styles.avatarStroke} src="/Vector 3.svg" alt="" aria-hidden="true" />
                     </div>
-                    {isCenter && (
-                      <div className={styles.starLabel}>
-                        <span className={styles.starLabelTop}>Лучший</span>
-                        <span className={styles.starLabelBottom}>{star.role}</span>
-                        <span className={styles.starLabelSmall}>Месяца</span>
-                      </div>
-                    )}
+                    <div
+                      className={styles.starLabel}
+                      style={{ opacity: isCenter ? 1 : 0 }}
+                    >
+                      <span className={styles.starLabelTop}>Лучший</span>
+                      <span className={styles.starLabelBottom}>{star.role}</span>
+                      <span className={styles.starLabelSmall}>Месяца</span>
+                      <span className={styles.starName}>{star.name}</span>
+                    </div>
                   </div>
                 )
               })}
@@ -96,7 +109,7 @@ export function HallOfFame() {
 
           <button
             className={styles.sliderArrowRight}
-            onClick={scrollRight}
+            onClick={() => slide(1)}
             aria-label="Следующий"
           >
             →

@@ -105,27 +105,23 @@
 }
 
 .starsContainer {
-  display: flex;
-  align-items: center;
-  gap: 6rem;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 2.5rem 0;
-}
-
-.noTransition {
-  transition: none !important;
-}
-
-.star {
   position: relative;
+  width: 100%;
+  height: 34rem;
+}
+
+.starItem {
+  position: absolute;
+  left: 50%;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  flex-shrink: 0;
   width: 15rem;
-  height: 20rem;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .starImage {
@@ -138,13 +134,14 @@
 
 .starShine {
   position: absolute;
-  top: 45%;
+  top: 6.75rem;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 15rem;
   height: 14rem;
   pointer-events: none;
   z-index: 1;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .starAvatar {
@@ -180,33 +177,15 @@
   z-index: 1;
 }
 
-.starBig {
-  transform: scale(1);
-  opacity: 1;
-  z-index: 2;
-}
-
-.starSmall {
-  transform: scale(0.6);
-  opacity: 0.6;
-}
-
-.starBlur {
-  opacity: 0.3;
-  filter: blur(4px);
-  transform: scale(0.4);
-}
-
-.starEdge {
-  opacity: 0.5;
-}
-
 .starLabel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
+  gap: 0.25rem;
+  margin-top: 2.5rem;
+  white-space: nowrap;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .starLabelTop {
@@ -229,6 +208,13 @@
   font-style: italic;
   font-size: 2rem;
   font-weight: 700;
+  color: #202020;
+}
+
+.starName {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
   color: #202020;
   margin-top: 0.5rem;
 }
