@@ -1,0 +1,31 @@
+.footer {
+  width: 100%;
+  background: #202020;
+  padding: 2.5rem;
+  box-sizing: border-box;
+}
+
+.footerContent {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.footerTitle {
+  color: #F6F6F6;
+  font-family: 'Lack', sans-serif;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 1.25rem;
+}
+
+.footerInfo {
+  color: #F6F6F6;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 157%;
+  margin: 0;
+}

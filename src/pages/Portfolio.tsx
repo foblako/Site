@@ -1,21 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { DEFAULT_USER } from '../data/portfolio'
+import { Footer } from '../components/Footer'
 import styles from './Portfolio.module.css'
-
-const skills = [
-  'HTML', 'CSS', 'JavaScript', 'Python', 'React', 'TypeScript',
-  'Node.js', 'Django', 'Git', 'Docker', 'SQL', 'Figma',
-]
-
-const goals = [
-  'Выучить Python',
-  'Закрыть долг по физ-ре',
-  'Получить красный диплом',
-]
 
 export function Portfolio() {
   const navigate = useNavigate()
-  const [displayName, setDisplayName] = useState('Программик Айтишникович')
+  const [displayName, setDisplayName] = useState(DEFAULT_USER.name)
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(displayName)
 
@@ -38,17 +29,6 @@ export function Portfolio() {
       setIsEditing(false)
     }
   }
-
-  const infoItems = [
-    { label: 'Образовательная программа', value: 'Бакалавриат' },
-    { label: 'Группа', value: 'КМБО-05-55' },
-    { label: 'Курс', value: '4 курс' },
-    { label: 'Шифр', value: '55К666' },
-    { label: 'Институт', value: 'ИИИ' },
-    { label: 'Формирующее подразделение', value: 'БК 536 РТУ МИРЭА' },
-    { label: 'Специальность', value: 'Прикладная математика и информатика' },
-    { label: 'Год приёма', value: '2055' },
-  ]
 
   return (
     <>
@@ -95,7 +75,7 @@ export function Portfolio() {
           <div className={styles.infoSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Основная информация</h2>
             <div className={styles.infoList}>
-              {infoItems.map((item) => (
+              {DEFAULT_USER.info.map((item) => (
                 <div key={item.label} className={styles.infoItem}>
                   <span className={styles.infoLabel}>{item.label}:</span>
                   <span className={styles.infoValue}>{item.value}</span>
@@ -107,28 +87,16 @@ export function Portfolio() {
           <div className={styles.aboutSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> О себе</h2>
             <div className={styles.aboutText}>
-              <p>
-                Я люблю работать над проектами, которые позволяют мне применять теорию на практике.
-                В своей учебе я сосредоточен на разработке веб-приложений и изучении алгоритмов.
-                Участвовал в нескольких хакатонах, где смог не только улучшить свои технические навыки,
-                но и научиться работать в команде.
-              </p>
-              <p>
-                Кроме программирования, меня интересуют новые технологии, такие как искусственный интеллект
-                и машинное обучение. Я всегда открыт для новых идей и возможностей сотрудничества,
-                поэтому не стесняйтесь обращаться ко мне!
-              </p>
-              <p>
-                В свободное время я люблю читать книги по саморазвитию и смотреть научно-популярные фильмы.
-                Я верю, что постоянное обучение и обмен опытом — ключ к успеху в этой быстро меняющейся области.
-              </p>
+              {DEFAULT_USER.about.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </div>
 
           <div className={styles.skillsSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Навыки</h2>
             <div className={styles.skillsList}>
-              {skills.map((skill) => (
+              {DEFAULT_USER.skills.map((skill) => (
                 <span key={skill} className={styles.skillTag}>{skill}</span>
               ))}
             </div>
@@ -137,7 +105,7 @@ export function Portfolio() {
           <div className={styles.goalsSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Цели</h2>
             <ul className={styles.goalsList}>
-              {goals.map((goal) => (
+              {DEFAULT_USER.goals.map((goal) => (
                 <li key={goal} className={styles.goalItem}>{goal}</li>
               ))}
             </ul>
@@ -146,15 +114,11 @@ export function Portfolio() {
           <div className={styles.worksSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Мои работы</h2>
             <div className={styles.worksLinks}>
-              <a href="http://example_github.com" className={styles.workLink} target="_blank" rel="noopener noreferrer">
-                Github: http://example_github.com
-              </a>
-              <a href="http://example_gitlab.com" className={styles.workLink} target="_blank" rel="noopener noreferrer">
-                Gitlab: http://example_gitlab.com
-              </a>
-              <a href="http://example_behance.com" className={styles.workLink} target="_blank" rel="noopener noreferrer">
-                Behance: http://example_behance.com
-              </a>
+              {DEFAULT_USER.works.map((work) => (
+                <a key={work.label} href={work.url} className={styles.workLink} target="_blank" rel="noopener noreferrer">
+                  {work.label}: {work.url}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -201,24 +165,16 @@ export function Portfolio() {
           <div className={styles.contactsSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Контакты</h2>
             <div className={styles.contactsList}>
-              <p className={styles.contactItem}>Телефон: +7(999)-123-45-67</p>
-              <p className={styles.contactItem}>Почта: prog_it@mail.com</p>
-              <p className={styles.contactItem}>Сайт: http://example.ru</p>
+              <p className={styles.contactItem}>Телефон: {DEFAULT_USER.contacts.phone}</p>
+              <p className={styles.contactItem}>Почта: {DEFAULT_USER.contacts.email}</p>
+              <p className={styles.contactItem}>Сайт: {DEFAULT_USER.contacts.website}</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <footer className={styles.footer}>
-      <div className={styles.footerContent}>
-        <h2 className={styles.footerTitle}>Контакты</h2>
-        <p className={styles.footerInfo}>
-          +7 (499) 215-65-65 доб. 2404<br />
-          vega@mirea.ru
-        </p>
-      </div>
-    </footer>
+    <Footer />
     </>
   )
 }

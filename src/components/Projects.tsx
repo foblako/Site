@@ -1,86 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { PROJECT_SUMMARIES } from '../data/projects'
 import styles from './Projects.module.css'
-
-type Project = {
-  id: string
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  status?: string
-  statusIcon?: string
-  likes?: number
-  comments?: number
-  participants?: number
-}
-
-const projects: Project[] = [
-  {
-    id: 'intellect-search',
-    title: 'Интеллектуальный поиск',
-    description:
-      'Интеллектуальный поиск — это инновационная система, позволяющая быстро и удобно находить документы из коллекции кафедры.',
-    image: '/intellectsearch.svg',
-    tags: ['#Frontend', '#Backend', '#Базы_данных'],
-    status: 'Завершен',
-    statusIcon: '/status-completed.svg',
-    likes: 1452,
-    comments: 213,
-    participants: 3,
-  },
-  {
-    id: 'kafedra-site',
-    title: 'Сайт кафедры',
-    description:
-      'Сайт кафедры — интернет-ресурс, представляющий информацию о научных проектах и учебных инициативах.',
-    image: '/siteKafedri.svg',
-    tags: ['#Web-дизайн', '#Backend', '#Frontend', '#Telegram_Bot'],
-    status: 'В архиве',
-    statusIcon: '/status-archived.svg',
-    likes: 1013,
-    comments: 191,
-    participants: 17,
-  },
-  {
-    id: 'russian-roulette',
-    title: 'Игра в русскую рулетку',
-    description:
-      'Проект позволяет играть онлайн в классическую рулетку с несколькими режимами и рейтингом участников.',
-    image: '/IgraRuletkka.svg',
-    tags: ['#Frontend', '#Telegram_Bot'],
-    status: 'Отменен',
-    statusIcon: '/status-cancelled.svg',
-    likes: 987,
-    comments: 125,
-    participants: 1,
-  },
-  {
-    id: 'mindmosaic',
-    title: 'MindMosaic for Vega MIREA Mobile App',
-    description:
-      'MindMosaic — интеллектуальная платформа для управления учебными данными и рекомендациями по развитию.',
-    image: '/MindMosaic.svg',
-    tags: ['#AI_товары', '#Mobile', '#Analytics'],
-    status: 'В разработке',
-    statusIcon: '/status-in-progress.svg',
-    likes: 771,
-    comments: 79,
-    participants: 2,
-  },
-  {
-    id: 'data-shop',
-    title: 'Дата-Шоп',
-    description:
-      'Мощная платформа для аналитики и визуализации данных, созданная для образовательных проектов.',
-    image: '/dataShar.svg',
-    tags: ['#Data_Science', '#Базы_данных'],
-    status: 'Идёт набор',
-    statusIcon: '/status-recruiting.svg',
-    likes: 312,
-    comments: 13,
-    participants: 0,
-  },
-]
 
 export function Projects() {
   const navigate = useNavigate()
@@ -102,7 +23,7 @@ export function Projects() {
       </div>
 
       <div className={styles.projectsGrid}>
-        {projects.map((project) => (
+        {PROJECT_SUMMARIES.map((project) => (
           <article key={project.id} className={styles.projectCard}>
             <div className={styles.cardImageWrapper} onClick={() => navigate(`/project/${project.id}`)} style={{ cursor: 'pointer' }}>
               <img
@@ -111,14 +32,10 @@ export function Projects() {
                 alt={project.title}
                 loading="lazy"
               />
-              {project.status ? (
-                <span className={styles.statusPill} data-status={project.status}>
-                  {project.statusIcon && (
-                    <img className={styles.statusIcon} src={project.statusIcon} alt="" aria-hidden="true" />
-                  )}
-                  {project.status}
-                </span>
-              ) : null}
+              <span className={styles.statusPill} data-status={project.status}>
+                <img className={styles.statusIcon} src={project.statusIcon} alt="" aria-hidden="true" />
+                {project.status}
+              </span>
             </div>
 
             <div className={styles.cardContent}>
@@ -142,7 +59,7 @@ export function Projects() {
                       alt="Likes"
                       className={styles.statIcon}
                     />
-                    {project.likes ?? 0}
+                    {project.likes}
                   </span>
                   <span className={styles.statItem}>
                     <img
@@ -150,7 +67,7 @@ export function Projects() {
                       alt="Comments"
                       className={styles.statIcon}
                     />
-                    {project.comments ?? 0}
+                    {project.comments}
                   </span>
                   <span className={styles.statItem}>
                     <img
@@ -158,7 +75,7 @@ export function Projects() {
                       alt="Participants"
                       className={styles.statIcon}
                     />
-                    {project.participants ?? 0}
+                    {project.participants}
                   </span>
                 </div>
               </div>
@@ -171,22 +88,12 @@ export function Projects() {
         ))}
       </div>
 
-      <div 
-        className={styles.viewAll}
-        onClick={() => navigate('/projects')}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            navigate('/projects')
-          }
-        }}
-      >
+      <Link to="/projects" className={styles.viewAll}>
         <div className={styles.viewAllContent}>
           <h2 className={styles.viewAllTitle}>Посмотрите все наши проекты</h2>
           <img className={styles.viewAllArrow} src="/arrow-right.svg" alt="" aria-hidden="true" />
         </div>
-      </div>
+      </Link>
     </section>
   )
 }

@@ -1,31 +1,24 @@
 import { useState, useMemo, useRef } from 'react'
+import { STARS } from '../data/hallOfFame'
 import styles from './HallOfFame.module.css'
-
-const stars = [
-  { id: 1, name: 'Иван Петров', role: 'Frontend', avatar: '/avatar.svg' },
-  { id: 2, name: 'Мария Иванова', role: 'Дизайнер', avatar: '/avatar.svg' },
-  { id: 3, name: 'Алексей Смирнов', role: 'Backend', avatar: '/avatar.svg' },
-  { id: 4, name: 'Елена Козлова', role: 'DevOps', avatar: '/avatar.svg' },
-  { id: 5, name: 'Дмитрий Морозов', role: 'Mobile', avatar: '/avatar.svg' },
-]
-
-const gap = 6 * window.devicePixelRatio
 
 export function HallOfFame() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
+  const gap = 6 * window.devicePixelRatio
+
   const scrollLeft = () => {
-    setActiveIndex(prev => (prev === 0 ? stars.length - 1 : prev - 1))
+    setActiveIndex(prev => (prev === 0 ? STARS.length - 1 : prev - 1))
   }
 
   const scrollRight = () => {
-    setActiveIndex(prev => (prev === stars.length - 1 ? 0 : prev + 1))
+    setActiveIndex(prev => (prev === STARS.length - 1 ? 0 : prev + 1))
   }
 
   const visibleStars = useMemo(() => {
-    return Array.from({ length: 5 }, (_, i) => 
-      stars[(activeIndex + i) % stars.length]
+    return Array.from({ length: 5 }, (_, i) =>
+      STARS[(activeIndex + i) % STARS.length]
     )
   }, [activeIndex])
 
@@ -60,7 +53,7 @@ export function HallOfFame() {
               }}
             >
               {visibleStars.map((star, index) => {
-                const displayIndex = (activeIndex + index) % stars.length
+                const displayIndex = (activeIndex + index) % STARS.length
                 const isCenter = displayIndex === 0
                 const isLeft = displayIndex === 4
                 const isRight = displayIndex === 1
@@ -77,11 +70,11 @@ export function HallOfFame() {
                   >
                     <img src="/BigStar.svg" alt="" className={styles.starImage} />
                     {isCenter && (
-                      <img 
-                        src="/CenterStarShine.svg" 
-                        alt="" 
-                        className={styles.starShine} 
-                        aria-hidden="true" 
+                      <img
+                        src="/CenterStarShine.svg"
+                        alt=""
+                        className={styles.starShine}
+                        aria-hidden="true"
                       />
                     )}
                     <div className={styles.avatarWrapper}>
