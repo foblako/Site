@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styles from './ProjectCard.module.css'
 
 type ProjectCardProps = {
-  id: string
   title: string
   description: string
   tags: string[]
@@ -12,11 +11,9 @@ type ProjectCardProps = {
   comments: number
   participants: number
   index: number
-  total: number
 }
 
 export function ProjectCard({
-  id,
   title,
   description,
   tags,
@@ -26,7 +23,6 @@ export function ProjectCard({
   comments,
   participants,
   index,
-  total,
 }: ProjectCardProps) {
   const [isFavorite, setIsFavorite] = useState(false)
 

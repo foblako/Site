@@ -8,7 +8,6 @@ type VacancyCardProps = {
   responsibilities: string
   responsibilitiesList: string[]
   index: number
-  total: number
 }
 
 export function VacancyCard({
@@ -18,7 +17,6 @@ export function VacancyCard({
   responsibilities,
   responsibilitiesList,
   index,
-  total,
 }: VacancyCardProps) {
   const [isApplied, setIsApplied] = useState(false)
 

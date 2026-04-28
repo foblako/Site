@@ -1,9 +1,8 @@
-import './App.css'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Projects } from './components/Projects'
+import { Projects as ProjectsSection } from './components/Projects'
 import { Directions } from './components/Directions'
 import { HallOfFame } from './components/HallOfFame'
 import { Vacancies as VacanciesSection } from './components/Vacancies'
@@ -11,7 +10,7 @@ import { Contacts } from './components/Contacts'
 import { Portfolio } from './pages/Portfolio'
 import { Project } from './pages/Project'
 import { Vacancies } from './pages/Vacancies'
-import {Projects as AllProjects} from './pages/Projects'
+import { Projects } from './pages/Projects'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -28,7 +27,7 @@ function HomePage() {
     <>
       <Header />
       <Hero />
-      <Projects />
+      <ProjectsSection />
       <Directions />
       <HallOfFame />
       <VacanciesSection />
@@ -46,7 +45,7 @@ function App() {
         <Route path="/portfolio" element={<><Header showPortfolioTitle /><Portfolio /></>} />
         <Route path="/vacancies" element={<><Header showPortfolioTitle /><Vacancies /></>} />
         <Route path="/project/:id" element={<><Header showPortfolioTitle /><Project /></>} />
-        <Route path="/projects" element={<><Header showPortfolioTitle /><AllProjects /></>} />
+        <Route path="/projects" element={<><Header showPortfolioTitle /><Projects /></>} />
       </Routes>
     </BrowserRouter>
   )
