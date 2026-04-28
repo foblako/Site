@@ -107,7 +107,7 @@
 .starsContainer {
   position: relative;
   width: 100%;
-  height: 30rem;
+  height: 34rem;
 }
 
 .starItem {
@@ -182,7 +182,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  margin-top: 0.5rem;
+  margin-top: 2.5rem;
   white-space: nowrap;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
