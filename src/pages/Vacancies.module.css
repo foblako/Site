@@ -243,3 +243,53 @@
   background: #EA5657;
   color: #F6F6F6;
 }
+
+.projectsLead {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  color: #202020;
+  margin: 0;
+}
+
+.highlightWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.highlightTitle {
+  font-family: 'Vasek', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 8rem;
+  color: #EA5657;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.underlinedWord {
+  position: relative;
+  display: inline-block;
+}
+
+.underlineSvg {
+  position: absolute;
+  left: 0;
+  bottom: 2rem;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.projectsSubhead {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  text-align: right;
+  color: #202020;
+  margin: 0;
+}

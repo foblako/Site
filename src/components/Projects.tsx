@@ -171,7 +171,17 @@ export function Projects() {
         ))}
       </div>
 
-      <div className={styles.viewAll}>
+      <div 
+        className={styles.viewAll}
+        onClick={() => navigate('/projects')}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            navigate('/projects')
+          }
+        }}
+      >
         <div className={styles.viewAllContent}>
           <h2 className={styles.viewAllTitle}>Посмотрите все наши проекты</h2>
           <img className={styles.viewAllArrow} src="/arrow-right.svg" alt="" aria-hidden="true" />

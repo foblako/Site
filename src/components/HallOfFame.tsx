@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import styles from './HallOfFame.module.css'
 
 const stars = [
@@ -9,7 +9,10 @@ const stars = [
   { id: 5, name: 'Дмитрий Морозов', role: 'Mobile', avatar: '/avatar.svg' },
 ]
 
+const gap = 6 * window.devicePixelRatio
+
 export function HallOfFame() {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
   const scrollLeft = () => {
@@ -20,10 +23,11 @@ export function HallOfFame() {
     setActiveIndex(prev => (prev === stars.length - 1 ? 0 : prev + 1))
   }
 
-  // Получаем 5 звёзд для отображения, начиная с activeIndex
-  const visibleStars = Array.from({ length: 5 }, (_, i) => 
-    stars[(activeIndex + i) % stars.length]
-  )
+  const visibleStars = useMemo(() => {
+    return Array.from({ length: 5 }, (_, i) => 
+      stars[(activeIndex + i) % stars.length]
+    )
+  }, [activeIndex])
 
   return (
     <section className={styles.hallOfFame} aria-label="Аллея Славы">
@@ -47,16 +51,24 @@ export function HallOfFame() {
           </button>
 
           <div className={styles.starsWrapper}>
-            <div className={styles.starsContainer}>
+            <div
+              ref={containerRef}
+              className={styles.starsContainer}
+              style={{
+                transform: `translateX(-${activeIndex * gap}px)`,
+                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+            >
               {visibleStars.map((star, index) => {
-                const isCenter = index === 2
-                const isLeft = index === 1
-                const isRight = index === 3
-                const isEdge = index === 0 || index === 4
+                const displayIndex = (activeIndex + index) % stars.length
+                const isCenter = displayIndex === 0
+                const isLeft = displayIndex === 4
+                const isRight = displayIndex === 1
+                const isEdge = displayIndex === 3 || displayIndex === 2
 
                 return (
                   <div
-                    key={`${star.id}-${activeIndex}-${index}`}
+                    key={`${star.id}-${displayIndex}`}
                     className={`${styles.star} ${
                       isCenter ? styles.starBig :
                       isLeft || isRight ? styles.starSmall :
@@ -65,7 +77,12 @@ export function HallOfFame() {
                   >
                     <img src="/BigStar.svg" alt="" className={styles.starImage} />
                     {isCenter && (
-                      <img src="/CenterStarShine.svg" alt="" className={styles.starShine} aria-hidden="true" />
+                      <img 
+                        src="/CenterStarShine.svg" 
+                        alt="" 
+                        className={styles.starShine} 
+                        aria-hidden="true" 
+                      />
                     )}
                     <div className={styles.avatarWrapper}>
                       <img src={star.avatar} alt={star.name} className={styles.starAvatar} />

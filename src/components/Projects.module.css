@@ -283,38 +283,46 @@
 
 .viewAll {
   display: flex;
-  width: calc(100% + 3rem);
+  width: calc(100% + 3rem); /* 100% + отступы слева и справа */
   max-width: calc(100% + 3rem);
-  padding: 1.25rem 2.625rem;
+  padding: 1.25rem 2.5rem;
   flex-direction: column;
   align-items: flex-end;
-  background-color: #EA5657;
-  margin: 5.25rem -1.5rem 0 -1.5rem;
+  border-radius: 0 0 2.5rem 2.5rem; /* скругление только снизу */
+  background: #EA5657;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5.25rem -1.5rem 0 -1.5rem; /* выходим за пределы контейнера */
+}
+
+.viewAll:hover {
+  background: #d64648;
 }
 
 .viewAllContent {
   display: flex;
   align-items: center;
-  gap: 6.0625rem;
 }
 
 .viewAllTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: 'Vasek', sans-serif;
+  font-size: 4rem;
   font-style: italic;
   font-weight: 400;
-  font-size: 4rem;
   line-height: normal;
   color: #F6F6F6;
   margin: 0;
-  overflow: visible;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 0.5rem;
 }
 
 .viewAllArrow {
   width: 3rem;
   height: 3rem;
   flex-shrink: 0;
+  margin-left: 6.0625rem;
 }

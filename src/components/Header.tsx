@@ -29,9 +29,9 @@ export function Header({ showPortfolioTitle = false }: HeaderProps) {
         )}
       </div>
       <nav className={styles.nav} aria-label="Main navigation">
-        <a href="#" className={styles.navLink}>
+        <Link to="/projects" className={styles.navLink}>
           <span>Проекты</span>
-        </a>
+        </Link>
         <a href="#" className={styles.navLink}>
           <span>
             Команды
