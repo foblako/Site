@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState } from 'react'
 import styles from './HallOfFame.module.css'
 
 const stars = [
@@ -9,25 +9,28 @@ const stars = [
   { id: 5, name: 'Дмитрий Морозов', role: 'Mobile', avatar: '/avatar.svg' },
 ]
 
-const gap = 6 * window.devicePixelRatio
+function mod(n: number, m: number) {
+  return ((n % m) + m) % m
+}
 
 export function HallOfFame() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
   const scrollLeft = () => {
-    setActiveIndex(prev => (prev === 0 ? stars.length - 1 : prev - 1))
+    setActiveIndex(prev => mod(prev - 1, stars.length))
   }
 
   const scrollRight = () => {
-    setActiveIndex(prev => (prev === stars.length - 1 ? 0 : prev + 1))
+    setActiveIndex(prev => mod(prev + 1, stars.length))
   }
 
-  const visibleStars = useMemo(() => {
-    return Array.from({ length: 5 }, (_, i) => 
-      stars[(activeIndex + i) % stars.length]
-    )
-  }, [activeIndex])
+  const getOffset = (starIndex: number): number => {
+    let diff = starIndex - activeIndex
+    const n = stars.length
+    if (diff > n / 2) diff -= n
+    if (diff < -n / 2) diff += n
+    return diff
+  }
 
   return (
     <section className={styles.hallOfFame} aria-label="Аллея Славы">
@@ -51,50 +54,45 @@ export function HallOfFame() {
           </button>
 
           <div className={styles.starsWrapper}>
-            <div
-              ref={containerRef}
-              className={styles.starsContainer}
-              style={{
-                transform: `translateX(-${activeIndex * gap}px)`,
-                transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}
-            >
-              {visibleStars.map((star, index) => {
-                const displayIndex = (activeIndex + index) % stars.length
-                const isCenter = displayIndex === 0
-                const isLeft = displayIndex === 4
-                const isRight = displayIndex === 1
-                const isEdge = displayIndex === 3 || displayIndex === 2
+            <div className={styles.starsContainer}>
+              {stars.map((star, index) => {
+                const offset = getOffset(index)
+                const isCenter = offset === 0
+                const absOffset = Math.abs(offset)
+                const scale = isCenter ? 1 : absOffset === 1 ? 0.65 : 0.45
 
                 return (
                   <div
-                    key={`${star.id}-${displayIndex}`}
-                    className={`${styles.star} ${
-                      isCenter ? styles.starBig :
-                      isLeft || isRight ? styles.starSmall :
-                      styles.starBlur
-                    } ${isEdge ? styles.starEdge : ''}`}
+                    key={star.id}
+                    className={styles.starItem}
+                    style={{
+                      transform: `translateX(calc(-50% + ${offset * 16}rem)) scale(${scale})`,
+                      opacity: isCenter ? 1 : absOffset === 1 ? 0.6 : 0.3,
+                      filter: absOffset >= 2 ? 'blur(4px)' : 'none',
+                      zIndex: isCenter ? 3 : absOffset === 1 ? 2 : 1,
+                    }}
                   >
                     <img src="/BigStar.svg" alt="" className={styles.starImage} />
-                    {isCenter && (
-                      <img 
-                        src="/CenterStarShine.svg" 
-                        alt="" 
-                        className={styles.starShine} 
-                        aria-hidden="true" 
-                      />
-                    )}
+                    <img
+                      src="/CenterStarShine.svg"
+                      alt=""
+                      className={styles.starShine}
+                      style={{ opacity: isCenter ? 1 : 0 }}
+                      aria-hidden="true"
+                    />
                     <div className={styles.avatarWrapper}>
                       <img src={star.avatar} alt={star.name} className={styles.starAvatar} />
                       <img className={styles.avatarStroke} src="/Vector 3.svg" alt="" aria-hidden="true" />
                     </div>
-                    {isCenter && (
-                      <div className={styles.starLabel}>
-                        <span className={styles.starLabelTop}>Лучший</span>
-                        <span className={styles.starLabelBottom}>{star.role}</span>
-                        <span className={styles.starLabelSmall}>Месяца</span>
-                      </div>
-                    )}
+                    <div
+                      className={styles.starLabel}
+                      style={{ opacity: isCenter ? 1 : 0 }}
+                    >
+                      <span className={styles.starLabelTop}>Лучший</span>
+                      <span className={styles.starLabelBottom}>{star.role}</span>
+                      <span className={styles.starLabelSmall}>Месяца</span>
+                      <span className={styles.starName}>{star.name}</span>
+                    </div>
                   </div>
                 )
               })}
