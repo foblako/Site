@@ -1,0 +1,354 @@
+{
+  "summaries": [
+    {
+      "id": "intellect-search",
+      "title": "Интеллектуальный поиск",
+      "description": "Интеллектуальный поиск — это инновационная система, позволяющая быстро и удобно находить документы из коллекции кафедры.",
+      "image": "/intellectsearch.svg",
+      "tags": [
+        "#Frontend",
+        "#Backend",
+        "#Базы_данных"
+      ],
+      "status": "Завершен",
+      "statusIcon": "/status-completed.svg",
+      "likes": 1452,
+      "comments": 213,
+      "participants": 3
+    },
+    {
+      "id": "kafedra-site",
+      "title": "Сайт кафедры",
+      "description": "Сайт кафедры — интернет-ресурс, представляющий информацию о научных проектах и учебных инициативах.",
+      "image": "/siteKafedri.svg",
+      "tags": [
+        "#Web-дизайн",
+        "#Backend",
+        "#Frontend",
+        "#Telegram_Bot"
+      ],
+      "status": "В архиве",
+      "statusIcon": "/status-archived.svg",
+      "likes": 1013,
+      "comments": 191,
+      "participants": 17
+    },
+    {
+      "id": "russian-roulette",
+      "title": "Игра в русскую рулетку",
+      "description": "Проект позволяет играть онлайн в классическую рулетку с несколькими режимами и рейтингом участников.",
+      "image": "/IgraRuletkka.svg",
+      "tags": [
+        "#Frontend",
+        "#Telegram_Bot"
+      ],
+      "status": "Отменен",
+      "statusIcon": "/status-cancelled.svg",
+      "likes": 987,
+      "comments": 125,
+      "participants": 1
+    },
+    {
+      "id": "mindmosaic",
+      "title": "MindMosaic for Vega MIREA Mobile App",
+      "description": "MindMosaic — интеллектуальная платформа для управления учебными данными и рекомендациями по развитию.",
+      "image": "/MindMosaic.svg",
+      "tags": [
+        "#AI_товары",
+        "#Mobile",
+        "#Analytics"
+      ],
+      "status": "В разработке",
+      "statusIcon": "/status-in-progress.svg",
+      "likes": 771,
+      "comments": 79,
+      "participants": 2
+    },
+    {
+      "id": "data-shop",
+      "title": "Дата-Шоп",
+      "description": "Мощная платформа для аналитики и визуализации данных, созданная для образовательных проектов.",
+      "image": "/dataShar.svg",
+      "tags": [
+        "#Data_Science",
+        "#Базы_данных"
+      ],
+      "status": "Идёт набор",
+      "statusIcon": "/status-recruiting.svg",
+      "likes": 312,
+      "comments": 13,
+      "participants": 0
+    }
+  ],
+  "details": {
+    "intellect-search": {
+      "id": "intellect-search",
+      "title": "Интеллектуальный поиск",
+      "description": "Интеллектуальный поиск — это инновационная система, позволяющая быстро и удобно находить документы из коллекции кафедры.",
+      "image": "/intellectsearch.svg",
+      "tags": [
+        "#Frontend",
+        "#Backend",
+        "#Базы_данных"
+      ],
+      "status": "Завершен",
+      "statusIcon": "/status-completed.svg",
+      "likes": 1452,
+      "comments": 213,
+      "participants": 3,
+      "fullDescription": "Интеллектуальный поиск — это инновационная система, позволяющая быстро и удобно находить документы из коллекции кафедры.\n\nПроект использует современные алгоритмы поиска и машинного обучения для предоставления релевантных результатов. Система анализирует запрос пользователя, учитывая контекст и предыдущие взаимодействия, чтобы предоставить наиболее подходящие документы.\n\nОсновные возможности включают полнотекстовый поиск, фильтрацию по категориям, сортировку по релевантности и дате, а также интеграцию с существующей инфраструктурой кафедры.",
+      "startDate": "01.09.2020",
+      "communityRating": 4.2,
+      "expertsRating": 4.8,
+      "team": [
+        {
+          "name": "Иванов И.И.",
+          "role": "Frontend-разработчик",
+          "avatar": "/avatar.svg",
+          "period": "с 2020 по н/в"
+        },
+        {
+          "name": "Петров П.П.",
+          "role": "Backend-разработчик",
+          "avatar": "/avatar.svg",
+          "period": "с 2020 по 2022"
+        },
+        {
+          "name": "Сидоров С.С.",
+          "role": "Дизайнер",
+          "avatar": "/avatar.svg",
+          "period": "с 2021 по н/в"
+        }
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "Elasticsearch"
+      ],
+      "screenshots": 5,
+      "reviews": [
+        {
+          "author": "Алексей К.",
+          "text": "Отличный проект! Очень удобный поиск документов.",
+          "rating": 5
+        },
+        {
+          "author": "Мария С.",
+          "text": "Полезная система для работы с документами кафедры.",
+          "rating": 4
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "Презентация",
+          "url": "#"
+        },
+        {
+          "name": "Документация",
+          "url": "#"
+        }
+      ]
+    },
+    "kafedra-site": {
+      "id": "kafedra-site",
+      "title": "Сайт кафедры",
+      "description": "Сайт кафедры — интернет-ресурс, представляющий информацию о научных проектах и учебных инициативах.",
+      "image": "/siteKafedri.svg",
+      "tags": [
+        "#Web-дизайн",
+        "#Backend",
+        "#Frontend",
+        "#Telegram_Bot"
+      ],
+      "status": "В архиве",
+      "statusIcon": "/status-archived.svg",
+      "likes": 1013,
+      "comments": 191,
+      "participants": 17,
+      "fullDescription": "Сайт кафедры — интернет-ресурс, представляющий информацию о научных проектах и учебных инициативах.\n\nПлатформа предоставляет удобный интерфейс для студентов и преподавателей, позволяя легко находить информацию о курсах, расписании, научных проектах и достижениях кафедры. Сайт регулярно обновляется и дополняется новыми материалами.\n\nПроект включает интеграцию с Telegram-ботом для уведомлений и автоматизации коммуникации.",
+      "startDate": "15.03.2021",
+      "communityRating": 3.8,
+      "expertsRating": 4.1,
+      "team": [
+        {
+          "name": "Завьялов Антон",
+          "role": "Руководитель проекта",
+          "avatar": "/avatar.svg",
+          "period": "с 2021 по н/в"
+        },
+        {
+          "name": "Дрейфельд Денис",
+          "role": "Fullstack-разработчик",
+          "avatar": "/avatar.svg",
+          "period": "с 2021 по н/в"
+        }
+      ],
+      "technologies": [
+        "React",
+        "Express.js",
+        "MongoDB",
+        "Telegram Bot API"
+      ],
+      "screenshots": 5,
+      "reviews": [
+        {
+          "author": "Дмитрий В.",
+          "text": "Хороший информационный ресурс.",
+          "rating": 4
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "ТЗ",
+          "url": "#"
+        }
+      ]
+    },
+    "russian-roulette": {
+      "id": "russian-roulette",
+      "title": "Игра в русскую рулетку",
+      "description": "Проект позволяет играть онлайн в классическую рулетку с несколькими режимами и рейтингом участников.",
+      "image": "/IgraRuletkka.svg",
+      "tags": [
+        "#Frontend",
+        "#Telegram_Bot"
+      ],
+      "status": "Отменен",
+      "statusIcon": "/status-cancelled.svg",
+      "likes": 987,
+      "comments": 125,
+      "participants": 1,
+      "fullDescription": "Проект позволяет играть онлайн в классическую рулетку с несколькими режимами и рейтингом участников.\n\nИгра поддерживает несколько режимов: классический, быстрый и турнирный. Система рейтинга позволяет отслеживать прогресс игроков и создавать справедливые матчи. Интеграция с Telegram-ботом обеспечивает уведомления о начале игры и результатах.",
+      "startDate": "10.06.2022",
+      "communityRating": 3.5,
+      "expertsRating": 3.2,
+      "team": [
+        {
+          "name": "Морозов М.М.",
+          "role": "Fullstack-разработчик",
+          "avatar": "/avatar.svg",
+          "period": "с 2022 по 2023"
+        }
+      ],
+      "technologies": [
+        "React",
+        "WebSocket",
+        "Telegram Bot API"
+      ],
+      "screenshots": 5,
+      "reviews": [
+        {
+          "author": "Игорь Т.",
+          "text": "Интересная идея, но не хватило реализации.",
+          "rating": 3
+        }
+      ],
+      "artifacts": []
+    },
+    "mindmosaic": {
+      "id": "mindmosaic",
+      "title": "MindMosaic for Vega MIREA Mobile App",
+      "description": "MindMosaic — интеллектуальная платформа для управления учебными данными и рекомендациями по развитию.",
+      "image": "/MindMosaic.svg",
+      "tags": [
+        "#AI_товары",
+        "#Mobile",
+        "#Analytics"
+      ],
+      "status": "В разработке",
+      "statusIcon": "/status-in-progress.svg",
+      "likes": 771,
+      "comments": 79,
+      "participants": 2,
+      "fullDescription": "MindMosaic — интеллектуальная платформа для управления учебными данными и рекомендациями по развитию.\n\nПлатформа использует алгоритмы искусственного интеллекта для анализа учебных данных студента и предоставления персонализированных рекомендаций по развитию. Система учитывает успеваемость, интересы и карьерные цели для формирования индивидуального плана развития.\n\nМобильное приложение обеспечивает удобный доступ ко всем функциям платформы в любое время.",
+      "startDate": "20.01.2023",
+      "communityRating": 4.5,
+      "expertsRating": 4.7,
+      "team": [
+        {
+          "name": "Волков В.В.",
+          "role": "ML-инженер",
+          "avatar": "/avatar.svg",
+          "period": "с 2023 по н/в"
+        },
+        {
+          "name": "Лебедев Л.Л.",
+          "role": "Mobile-разработчик",
+          "avatar": "/avatar.svg",
+          "period": "с 2023 по н/в"
+        }
+      ],
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "React Native",
+        "FastAPI"
+      ],
+      "screenshots": 5,
+      "reviews": [
+        {
+          "author": "Елена П.",
+          "text": "Отличная платформа для управления учебными данными!",
+          "rating": 5
+        },
+        {
+          "author": "Андрей Р.",
+          "text": "Перспективный проект с хорошей аналитикой.",
+          "rating": 4
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "Презентация",
+          "url": "#"
+        },
+        {
+          "name": "Исследование",
+          "url": "#"
+        }
+      ]
+    },
+    "data-shop": {
+      "id": "data-shop",
+      "title": "Дата-Шоп",
+      "description": "Мощная платформа для аналитики и визуализации данных, созданная для образовательных проектов.",
+      "image": "/dataShar.svg",
+      "tags": [
+        "#Data_Science",
+        "#Базы_данных"
+      ],
+      "status": "Идёт набор",
+      "statusIcon": "/status-recruiting.svg",
+      "likes": 312,
+      "comments": 13,
+      "participants": 0,
+      "fullDescription": "Мощная платформа для аналитики и визуализации данных, созданная для образовательных проектов.\n\nПлатформа предоставляет инструменты для сбора, обработки и визуализации данных. Пользователи могут создавать интерактивные дашборды, настраивать отчёты и делиться результатами с коллегами. Система поддерживает различные источники данных и форматы экспорта.\n\nПроект находится в стадии активного набора участников для расширения функциональности.",
+      "startDate": "05.11.2023",
+      "communityRating": 4,
+      "expertsRating": 4.3,
+      "team": [],
+      "technologies": [
+        "Python",
+        "Pandas",
+        "D3.js",
+        "PostgreSQL"
+      ],
+      "screenshots": 5,
+      "reviews": [
+        {
+          "author": "Ольга Н.",
+          "text": "Удобная платформа для работы с данными, но ещё сыровата.",
+          "rating": 4
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "Руководство пользователя",
+          "url": "#"
+        }
+      ]
+    }
+  }
+}

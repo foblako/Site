@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Frontend",
+    "technologies": [
+      "HTML",
+      "JS",
+      "CSS",
+      "PHP"
+    ]
+  },
+  {
+    "name": "Backend",
+    "technologies": [
+      "Python",
+      "Java",
+      "Go",
+      "Node.js"
+    ]
+  },
+  {
+    "name": "DevOps",
+    "technologies": [
+      "Docker",
+      "Kubernetes",
+      "CI/CD"
+    ]
+  },
+  {
+    "name": "Mobile",
+    "technologies": [
+      "Swift",
+      "Kotlin",
+      "Flutter"
+    ]
+  },
+  {
+    "name": "Data Science",
+    "technologies": [
+      "Python",
+      "R",
+      "SQL",
+      "ML"
+    ]
+  },
+  {
+    "name": "Web-дизайн",
+    "technologies": [
+      "Figma",
+      "Adobe",
+      "Sketch"
+    ]
+  },
+  {
+    "name": "Telegram Bot",
+    "technologies": [
+      "Python",
+      "Node.js",
+      "API"
+    ]
+  },
+  {
+    "name": "Базы данных",
+    "technologies": [
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB"
+    ]
+  },
+  {
+    "name": "AI/ML",
+    "technologies": [
+      "TensorFlow",
+      "PyTorch",
+      "OpenAI"
+    ]
+  },
+  {
+    "name": "Тестирование",
+    "technologies": [
+      "Selenium",
+      "Jest",
+      "Cypress"
+    ]
+  }
+]
