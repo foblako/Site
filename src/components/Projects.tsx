@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { PROJECT_SUMMARIES } from '../data/projects'
+import { Link, useNavigate } from 'react-router-dom'
+import { fetchProjects, useApi } from '../api'
 import styles from './Projects.module.css'
 
 export function Projects() {
   const navigate = useNavigate()
+  const { data: projects } = useApi((signal) => fetchProjects(signal), [])
 
   return (
     <section id="projects" className={styles.projectsSection} aria-label="Projects">
@@ -23,7 +23,7 @@ export function Projects() {
       </div>
 
       <div className={styles.projectsGrid}>
-        {PROJECT_SUMMARIES.map((project) => (
+        {(projects ?? []).map((project) => (
           <article key={project.id} className={styles.projectCard}>
             <div className={styles.cardImageWrapper} onClick={() => navigate(`/project/${project.id}`)} style={{ cursor: 'pointer' }}>
               <img

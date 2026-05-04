@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PROJECT_SUMMARIES, PROJECT_TAGS } from '../data/projects'
+import { fetchProjects, useApi } from '../api'
+import { ApiStatus } from '../components/ApiStatus'
 import { Footer } from '../components/Footer'
+import { PROJECT_TAGS } from '../constants/filters'
 import styles from './Projects.module.css'
 
 export function Projects() {
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const { data: projects, loading, error } = useApi((signal) => fetchProjects(signal), [])
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
@@ -17,7 +20,7 @@ export function Projects() {
     )
   }
 
-  const filteredProjects = PROJECT_SUMMARIES.filter(project => {
+  const filteredProjects = (projects ?? []).filter(project => {
     const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          project.description.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesTags = selectedTags.length === 0 ||
@@ -77,6 +80,13 @@ export function Projects() {
               ))}
             </div>
           </div>
+
+          <ApiStatus
+            loading={loading}
+            error={error}
+            empty={!loading && !error && filteredProjects.length === 0}
+            emptyMessage="По заданным фильтрам ничего не найдено"
+          />
 
           <div className={styles.projectsGrid}>
             {filteredProjects.map((project) => (

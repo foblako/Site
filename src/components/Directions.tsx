@@ -1,7 +1,9 @@
-import { DIRECTIONS } from '../data/directions'
+import { fetchDirections, useApi } from '../api'
 import styles from './Directions.module.css'
 
 export function Directions() {
+  const { data: directions } = useApi((signal) => fetchDirections(signal), [])
+
   return (
     <section className={styles.directions} aria-label="Направления">
       <div className={styles.content}>
@@ -15,7 +17,7 @@ export function Directions() {
         <h2 className={styles.subtitle}>исследований и разработки</h2>
 
         <div className={styles.list}>
-          {DIRECTIONS.map((item) => (
+          {(directions ?? []).map((item) => (
             <div key={item.name} className={styles.listItem}>
               <div className={styles.listLeft}>
                 <span className={styles.listSlash}>//</span>

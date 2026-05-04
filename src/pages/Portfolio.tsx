@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DEFAULT_USER } from '../data/portfolio'
+import { fetchDefaultPortfolio, useApi } from '../api'
+import { ApiStatus } from '../components/ApiStatus'
 import { Footer } from '../components/Footer'
 import styles from './Portfolio.module.css'
 
 export function Portfolio() {
   const navigate = useNavigate()
-  const [displayName, setDisplayName] = useState(DEFAULT_USER.name)
+  const { data: profile, loading, error } = useApi(
+    (signal) => fetchDefaultPortfolio(signal),
+    [],
+  )
+  // Local override applied on top of the server name; stays null until the
+  // user actually edits, so a refetch keeps the displayed name in sync.
+  const [nameOverride, setNameOverride] = useState<string | null>(null)
   const [isEditing, setIsEditing] = useState(false)
-  const [editValue, setEditValue] = useState(displayName)
+  const [editValue, setEditValue] = useState('')
+  const displayName = nameOverride ?? profile?.name ?? ''
 
   const handleEditClick = () => {
     setEditValue(displayName)
@@ -17,7 +25,7 @@ export function Portfolio() {
 
   const handleSave = () => {
     if (editValue.trim()) {
-      setDisplayName(editValue.trim())
+      setNameOverride(editValue.trim())
     }
     setIsEditing(false)
   }
@@ -28,6 +36,14 @@ export function Portfolio() {
     } else if (e.key === 'Escape') {
       setIsEditing(false)
     }
+  }
+
+  if (!profile) {
+    return (
+      <section className={styles.portfolio} aria-label="Портфолио">
+        <ApiStatus loading={loading} error={error} />
+      </section>
+    )
   }
 
   return (
@@ -75,7 +91,7 @@ export function Portfolio() {
           <div className={styles.infoSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Основная информация</h2>
             <div className={styles.infoList}>
-              {DEFAULT_USER.info.map((item) => (
+              {profile.info.map((item) => (
                 <div key={item.label} className={styles.infoItem}>
                   <span className={styles.infoLabel}>{item.label}:</span>
                   <span className={styles.infoValue}>{item.value}</span>
@@ -87,7 +103,7 @@ export function Portfolio() {
           <div className={styles.aboutSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> О себе</h2>
             <div className={styles.aboutText}>
-              {DEFAULT_USER.about.map((paragraph, index) => (
+              {profile.about.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
@@ -96,7 +112,7 @@ export function Portfolio() {
           <div className={styles.skillsSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Навыки</h2>
             <div className={styles.skillsList}>
-              {DEFAULT_USER.skills.map((skill) => (
+              {profile.skills.map((skill) => (
                 <span key={skill} className={styles.skillTag}>{skill}</span>
               ))}
             </div>
@@ -105,7 +121,7 @@ export function Portfolio() {
           <div className={styles.goalsSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Цели</h2>
             <ul className={styles.goalsList}>
-              {DEFAULT_USER.goals.map((goal) => (
+              {profile.goals.map((goal) => (
                 <li key={goal} className={styles.goalItem}>{goal}</li>
               ))}
             </ul>
@@ -114,7 +130,7 @@ export function Portfolio() {
           <div className={styles.worksSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Мои работы</h2>
             <div className={styles.worksLinks}>
-              {DEFAULT_USER.works.map((work) => (
+              {profile.works.map((work) => (
                 <a key={work.label} href={work.url} className={styles.workLink} target="_blank" rel="noopener noreferrer">
                   {work.label}: {work.url}
                 </a>
@@ -165,9 +181,9 @@ export function Portfolio() {
           <div className={styles.contactsSection}>
             <h2 className={styles.sectionTitle}><span className={styles.sectionSlash}>//</span> Контакты</h2>
             <div className={styles.contactsList}>
-              <p className={styles.contactItem}>Телефон: {DEFAULT_USER.contacts.phone}</p>
-              <p className={styles.contactItem}>Почта: {DEFAULT_USER.contacts.email}</p>
-              <p className={styles.contactItem}>Сайт: {DEFAULT_USER.contacts.website}</p>
+              <p className={styles.contactItem}>Телефон: {profile.contacts.phone}</p>
+              <p className={styles.contactItem}>Почта: {profile.contacts.email}</p>
+              <p className={styles.contactItem}>Сайт: {profile.contacts.website}</p>
             </div>
           </div>
         </div>
