@@ -18,6 +18,13 @@ class Settings(BaseSettings):
         default_factory=lambda: ["http://localhost:5173"]
     )
 
+    # JWT / auth. The default secret is fine for local development only —
+    # production deployments MUST set JWT_SECRET to a random value.
+    jwt_secret: str = "dev-jwt-secret-do-not-use-in-prod"
+    jwt_algorithm: str = "HS256"
+    access_token_ttl_minutes: int = 30
+    refresh_token_ttl_days: int = 14
+
     debug: bool = False
 
     @field_validator("cors_origins", mode="before")

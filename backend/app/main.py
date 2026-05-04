@@ -2,7 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import settings
-from .routers import contacts, directions, hall_of_fame, portfolio, projects, vacancies
+from .routers import (
+    auth,
+    contacts,
+    directions,
+    hall_of_fame,
+    portfolio,
+    projects,
+    vacancies,
+)
 
 app = FastAPI(
     title="Vega Site API",
@@ -25,6 +33,7 @@ async def health() -> dict[str, str]:
 
 
 for router in (
+    auth.router,
     projects.router,
     vacancies.router,
     directions.router,
