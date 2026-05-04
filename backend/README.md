@@ -2,11 +2,13 @@
 
 FastAPI backend for the Vega MIREA department site (foblako/Site).
 
-This is **PR 1** of the rollout described in `backend-plan.md`: it ships the
-runnable skeleton, the database schema, the public read-only `GET` endpoints,
-and a seeder that mirrors the data the React frontend currently bundles in
-`src/data/*.ts`. Authentication, mutations (likes, comments, applications) and
-admin CRUD will land in subsequent PRs.
+**PR 1** shipped the runnable skeleton, the database schema, the public
+read-only `GET` endpoints, and a seeder that mirrors the data the React
+frontend currently bundles in `src/data/*.ts`. **PR 2 (this change)** adds
+email/password authentication: `User` model + migration, bcrypt password
+hashing, JWT access/refresh tokens, and `/api/auth/{register,login,refresh,me}`.
+Mutations (likes, comments, applications) and admin CRUD will land in
+subsequent PRs.
 
 ## Quick start (Docker, recommended)
 
@@ -30,21 +32,26 @@ python -m app.seed
 uvicorn app.main:app --reload
 ```
 
-## Endpoints (PR 1)
+## Endpoints
 
-All endpoints are read-only and unauthenticated.
+| Method | Path                        | Auth      | Notes                                              |
+| ------ | --------------------------- | --------- | -------------------------------------------------- |
+| GET    | `/api/health`               | —         | Liveness probe                                     |
+| POST   | `/api/auth/register`        | —         | Create a new user (email + password)               |
+| POST   | `/api/auth/login`           | —         | Returns `{accessToken, refreshToken}`              |
+| POST   | `/api/auth/refresh`         | refresh   | Trade refresh token for a fresh pair               |
+| GET    | `/api/auth/me`              | access    | Current user                                       |
+| GET    | `/api/projects`             | —         | Project summaries (matches `ProjectSummary[]`)     |
+| GET    | `/api/projects/{id}`        | —         | Project detail (matches `ProjectDetail`)           |
+| GET    | `/api/vacancies`            | —         | Vacancy list                                       |
+| GET    | `/api/vacancies/{id}`       | —         | Single vacancy                                     |
+| GET    | `/api/directions`           | —         | Department directions                              |
+| GET    | `/api/hall-of-fame`         | —         | Hall-of-fame stars                                 |
+| GET    | `/api/contacts/department`  | —         | Department phone/email                             |
+| GET    | `/api/portfolio/default`    | —         | The seeded `DEFAULT_USER` portfolio                |
 
-| Method | Path                        | Notes                                              |
-| ------ | --------------------------- | -------------------------------------------------- |
-| GET    | `/api/health`               | Liveness probe                                     |
-| GET    | `/api/projects`             | Project summaries (matches `ProjectSummary[]`)     |
-| GET    | `/api/projects/{id}`        | Project detail (matches `ProjectDetail`)           |
-| GET    | `/api/vacancies`            | Vacancy list                                       |
-| GET    | `/api/vacancies/{id}`       | Single vacancy                                     |
-| GET    | `/api/directions`           | Department directions                              |
-| GET    | `/api/hall-of-fame`         | Hall-of-fame stars                                 |
-| GET    | `/api/contacts/department`  | Department phone/email                             |
-| GET    | `/api/portfolio/default`    | The seeded `DEFAULT_USER` portfolio                |
+Authenticated endpoints expect `Authorization: Bearer <accessToken>`. Tokens
+are signed with `JWT_SECRET` from `.env` (regenerate for production).
 
 JSON keys are `camelCase` so they match the existing TypeScript types in
 `src/types/index.ts` without any frontend changes.

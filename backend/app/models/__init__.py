@@ -4,6 +4,7 @@ from .direction import Direction
 from .hall_of_fame import HallOfFameStar
 from .profile import Profile
 from .project import Project
+from .user import User
 from .vacancy import Vacancy
 
 __all__ = [
@@ -13,5 +14,6 @@ __all__ = [
     "HallOfFameStar",
     "Profile",
     "Project",
+    "User",
     "Vacancy",
 ]
