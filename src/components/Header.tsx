@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/useAuth'
 import styles from './Header.module.css'
 
 type HeaderProps = {
@@ -9,6 +10,10 @@ type HeaderProps = {
 export function Header({ showPortfolioTitle = false }: HeaderProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const { user, status, logout } = useAuth()
+  const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +25,24 @@ export function Header({ showPortfolioTitle = false }: HeaderProps) {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [lastScrollY])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleClick = (e: MouseEvent) => {
+      if (menuRef.current === null) return
+      if (!menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [menuOpen])
+
+  const handleLogout = () => {
+    logout()
+    setMenuOpen(false)
+    navigate('/')
+  }
 
   return (
     <header className={`${styles.header} ${!isVisible ? styles.headerHidden : ''}`}>
@@ -52,10 +75,50 @@ export function Header({ showPortfolioTitle = false }: HeaderProps) {
           <img src="/Vector (1).svg" alt="Messages" />
         </button>
 
-        <Link to="/portfolio" className={styles.avatarWrapper} aria-label="Profile">
-          <img className={styles.avatar} src="/avatar.svg" alt="User avatar" />
-          <img className={styles.avatarStroke} src="/Vector 3.svg" alt="" aria-hidden="true" />
-        </Link>
+        {status === 'authenticated' && user !== null ? (
+          <div className={styles.authMenu} ref={menuRef}>
+            <button
+              type="button"
+              className={styles.avatarWrapper}
+              aria-label={`Профиль ${user.displayName}`}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <img className={styles.avatar} src="/avatar.svg" alt="User avatar" />
+              <img className={styles.avatarStroke} src="/Vector 3.svg" alt="" aria-hidden="true" />
+            </button>
+            {menuOpen && (
+              <div className={styles.authDropdown} role="menu">
+                <div className={styles.authMenuHeader}>
+                  <strong>{user.displayName}</strong>
+                  <span>{user.email}</span>
+                </div>
+                <Link
+                  to="/portfolio"
+                  className={styles.authMenuItem}
+                  role="menuitem"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Моё портфолио
+                </Link>
+                <button
+                  type="button"
+                  className={styles.authMenuItem}
+                  role="menuitem"
+                  onClick={handleLogout}
+                >
+                  Выйти
+                </button>
+              </div>
+            )}
+          </div>
+        ) : status === 'loading' ? (
+          <span className={styles.authLoading} aria-hidden="true" />
+        ) : (
+          <Link to="/login" className={styles.loginButton}>
+            Войти
+          </Link>
+        )}
       </nav>
     </header>
   )
