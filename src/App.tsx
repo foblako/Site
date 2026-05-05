@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { AuthProvider } from './auth/AuthContext'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Projects as ProjectsSection } from './components/Projects'
@@ -7,6 +8,7 @@ import { Directions } from './components/Directions'
 import { HallOfFame } from './components/HallOfFame'
 import { Vacancies as VacanciesSection } from './components/Vacancies'
 import { Contacts } from './components/Contacts'
+import { Login } from './pages/Login'
 import { Portfolio } from './pages/Portfolio'
 import { Project } from './pages/Project'
 import { Vacancies } from './pages/Vacancies'
@@ -39,14 +41,17 @@ function HomePage() {
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/portfolio" element={<><Header showPortfolioTitle /><Portfolio /></>} />
-        <Route path="/vacancies" element={<><Header showPortfolioTitle /><Vacancies /></>} />
-        <Route path="/project/:id" element={<><Header showPortfolioTitle /><Project /></>} />
-        <Route path="/projects" element={<><Header showPortfolioTitle /><Projects /></>} />
-      </Routes>
+      <AuthProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/portfolio" element={<><Header showPortfolioTitle /><Portfolio /></>} />
+          <Route path="/vacancies" element={<><Header showPortfolioTitle /><Vacancies /></>} />
+          <Route path="/project/:id" element={<><Header showPortfolioTitle /><Project /></>} />
+          <Route path="/projects" element={<><Header showPortfolioTitle /><Projects /></>} />
+          <Route path="/login" element={<><Header showPortfolioTitle /><Login /></>} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
