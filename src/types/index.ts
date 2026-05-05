@@ -71,3 +71,17 @@ export type UserProfile = {
   works: { label: string; url: string }[]
   contacts: { phone: string; email: string; website: string }
 }
+
+export type AuthUser = {
+  id: string
+  email: string
+  displayName: string
+  role: string
+  createdAt: string
+}
+
+export type TokenPair = {
+  accessToken: string
+  refreshToken: string
+  tokenType: string
+}

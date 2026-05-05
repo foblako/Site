@@ -1,4 +1,9 @@
-export { ApiError, apiRequest } from './client'
+export {
+  ApiError,
+  apiRequest,
+  setAuthAccessTokenProvider,
+  setAuthRefreshHandler,
+} from './client'
 export { useApi } from './useApi'
 export type { ApiState } from './useApi'
 
@@ -9,3 +14,6 @@ export { fetchHallOfFame } from './hallOfFame'
 export { fetchDefaultPortfolio } from './portfolio'
 export { fetchDepartmentContacts } from './contacts'
 export type { DepartmentContacts } from './contacts'
+
+export { fetchMe, login, refresh, register } from './auth'
+export type { LoginPayload, RegisterPayload } from './auth'
