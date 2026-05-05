@@ -92,8 +92,14 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
   const headers: Record<string, string> = { Accept: 'application/json' }
   let payload: BodyInit | undefined
   if (body !== undefined) {
-    headers['Content-Type'] = 'application/json'
-    payload = JSON.stringify(body)
+    if (body instanceof FormData) {
+      // Let the browser set `Content-Type: multipart/form-data; boundary=...`
+      // for us — overriding it here would break the boundary marker.
+      payload = body
+    } else {
+      headers['Content-Type'] = 'application/json'
+      payload = JSON.stringify(body)
+    }
   }
 
   const initialToken = auth ? accessTokenProvider() : null

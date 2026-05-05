@@ -31,4 +31,5 @@ class UserOut(CamelModel):
     email: EmailStr
     display_name: str
     role: str
+    avatar_url: str | None = None
     created_at: datetime

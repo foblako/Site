@@ -17,7 +17,14 @@ async def test_register_creates_user(client: AsyncClient) -> None:
     response = await client.post("/api/auth/register", json=REGISTER_BODY)
     assert response.status_code == 201, response.text
     payload = response.json()
-    assert set(payload.keys()) == {"id", "email", "displayName", "role", "createdAt"}
+    assert set(payload.keys()) == {
+        "id",
+        "email",
+        "displayName",
+        "role",
+        "avatarUrl",
+        "createdAt",
+    }
     assert payload["email"] == "alice@example.com"
     assert payload["displayName"] == "Alice"
     assert payload["role"] == "user"

@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   ApiError,
+  deleteAvatar,
   fetchDefaultPortfolio,
   fetchMyPortfolio,
   updateMyPortfolio,
+  uploadAvatar,
   useApi,
 } from '../api'
 import type { PortfolioPatch } from '../api'
@@ -14,14 +16,59 @@ import { Footer } from '../components/Footer'
 import type { UserProfile } from '../types'
 import styles from './Portfolio.module.css'
 
+const API_BASE = (
+  (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8000'
+).replace(/\/$/, '')
+
 type SectionKey = 'name' | 'about' | 'skills' | 'goals'
 
 type EditState = { section: SectionKey; value: string } | null
 
 export function Portfolio() {
   const navigate = useNavigate()
-  const { status } = useAuth()
+  const { status, user, setUser } = useAuth()
   const isAuthenticated = status === 'authenticated'
+
+  const avatarInputRef = useRef<HTMLInputElement>(null)
+  const [avatarUploading, setAvatarUploading] = useState(false)
+  const [avatarError, setAvatarError] = useState<string | null>(null)
+
+  const handleAvatarChange: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    setAvatarUploading(true)
+    setAvatarError(null)
+    try {
+      const updated = await uploadAvatar(file)
+      setUser(updated)
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 413) {
+        setAvatarError('Файл слишком большой (лимит 5 МБ).')
+      } else if (err instanceof ApiError && err.status === 415) {
+        setAvatarError('Поддерживаются только PNG, JPG, WEBP и GIF.')
+      } else if (err instanceof ApiError && err.status === 401) {
+        navigate('/login')
+      } else {
+        setAvatarError('Не удалось загрузить аватар.')
+      }
+    } finally {
+      setAvatarUploading(false)
+    }
+  }
+
+  const handleAvatarDelete = async () => {
+    setAvatarUploading(true)
+    setAvatarError(null)
+    try {
+      const updated = await deleteAvatar()
+      setUser(updated)
+    } catch {
+      setAvatarError('Не удалось удалить аватар.')
+    } finally {
+      setAvatarUploading(false)
+    }
+  }
 
   const { data: serverProfile, loading, error } = useApi<UserProfile>(
     (signal) => (isAuthenticated ? fetchMyPortfolio(signal) : fetchDefaultPortfolio(signal)),
@@ -140,8 +187,51 @@ export function Portfolio() {
       <section className={styles.portfolio} aria-label="Портфолио">
       <div className={styles.portfolioGrid}>
         <div className={styles.avatarBlock}>
-          <img className={styles.avatarLarge} src="/avatar.svg" alt="User avatar" />
+          <img
+            className={styles.avatarLarge}
+            src={
+              isAuthenticated && user?.avatarUrl
+                ? `${API_BASE}${user.avatarUrl}`
+                : '/avatar.svg'
+            }
+            alt="User avatar"
+          />
           <img className={styles.avatarStroke} src="/Vector 3.svg" alt="" aria-hidden="true" />
+          {canEdit && (
+            <div className={styles.avatarControls}>
+              <input
+                ref={avatarInputRef}
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                hidden
+                onChange={handleAvatarChange}
+              />
+              <button
+                type="button"
+                className={styles.avatarUploadButton}
+                onClick={() => avatarInputRef.current?.click()}
+                disabled={avatarUploading}
+              >
+                {avatarUploading
+                  ? 'Загрузка…'
+                  : user?.avatarUrl
+                    ? 'Сменить аватар'
+                    : 'Загрузить аватар'}
+              </button>
+              {user?.avatarUrl && !avatarUploading && (
+                <button
+                  type="button"
+                  className={styles.avatarDeleteButton}
+                  onClick={handleAvatarDelete}
+                >
+                  Удалить
+                </button>
+              )}
+              {avatarError !== null && (
+                <span className={styles.avatarError}>{avatarError}</span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className={styles.nameBlock}>

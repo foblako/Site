@@ -23,6 +23,7 @@ export { fetchDirections } from './directions'
 export { fetchHallOfFame } from './hallOfFame'
 export { fetchDefaultPortfolio, fetchMyPortfolio, updateMyPortfolio } from './portfolio'
 export type { PortfolioPatch } from './portfolio'
+export { deleteAvatar, uploadAvatar } from './uploads'
 export { fetchDepartmentContacts } from './contacts'
 export type { DepartmentContacts } from './contacts'
 
