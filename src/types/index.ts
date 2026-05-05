@@ -71,6 +71,7 @@ export type VacancyApplication = {
 }
 
 export type Direction = {
+  id: number
   name: string
   technologies: string[]
 }

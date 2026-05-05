@@ -29,3 +29,20 @@ export type { DepartmentContacts } from './contacts'
 
 export { fetchMe, login, refresh, register } from './auth'
 export type { LoginPayload, RegisterPayload } from './auth'
+
+export {
+  createDirection,
+  createProject,
+  createStar,
+  createVacancy,
+  deleteDirection,
+  deleteProject,
+  deleteStar,
+  deleteVacancy,
+  fetchVacancyApplications,
+  updateDirection,
+  updateProject,
+  updateStar,
+  updateVacancy,
+} from './admin'
+export type { AdminVacancyApplication } from './admin'

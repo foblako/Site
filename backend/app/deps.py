@@ -45,6 +45,20 @@ async def get_current_user(
     return user
 
 
+async def require_admin(user: User = Depends(get_current_user)) -> User:
+    """Require the caller to be an authenticated user with `role == 'admin'`.
+
+    Returns 403 for plain authenticated users — note that this is distinct
+    from the 401 `get_current_user` raises when no/invalid token is supplied.
+    """
+    if user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin privileges required",
+        )
+    return user
+
+
 async def get_optional_user(
     credentials: HTTPAuthorizationCredentials | None = Depends(_bearer_scheme),
     session: AsyncSession = Depends(get_session),

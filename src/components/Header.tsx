@@ -109,6 +109,16 @@ export function Header({ showPortfolioTitle = false }: HeaderProps) {
                 >
                   Моё портфолио
                 </Link>
+                {user.role === 'admin' && (
+                  <Link
+                    to="/admin"
+                    className={styles.authMenuItem}
+                    role="menuitem"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Админка
+                  </Link>
+                )}
                 <button
                   type="button"
                   className={styles.authMenuItem}

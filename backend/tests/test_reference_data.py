@@ -6,7 +6,7 @@ async def test_directions(client: AsyncClient) -> None:
     assert response.status_code == 200
     payload = response.json()
     assert isinstance(payload, list)
-    assert all(set(item.keys()) == {"name", "technologies"} for item in payload)
+    assert all(set(item.keys()) == {"id", "name", "technologies"} for item in payload)
 
 
 async def test_hall_of_fame(client: AsyncClient) -> None:
