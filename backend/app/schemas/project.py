@@ -12,6 +12,14 @@ class ProjectSummary(CamelModel):
     likes: int
     comments: int
     participants: int
+    # `None` for anonymous visitors (we don't know whether they liked it).
+    # `True`/`False` once the request carries a valid access token.
+    liked_by_me: bool | None = None
+
+
+class ProjectLikeResponse(CamelModel):
+    liked: bool
+    like_count: int
 
 
 class TeamMember(CamelModel):

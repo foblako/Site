@@ -43,3 +43,21 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     return user
+
+
+async def get_optional_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(_bearer_scheme),
+    session: AsyncSession = Depends(get_session),
+) -> User | None:
+    """Same as `get_current_user`, but returns `None` instead of raising 401
+    when there is no (or an invalid) token. Use it on endpoints that should
+    also serve anonymous users but want to enrich the response for logged-in
+    ones (e.g. `likedByMe` on project lists).
+    """
+    if credentials is None or credentials.scheme.lower() != "bearer":
+        return None
+    try:
+        user_id = decode_token(credentials.credentials, expected_type="access")
+    except TokenError:
+        return None
+    return await session.get(User, user_id)

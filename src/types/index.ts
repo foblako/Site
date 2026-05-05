@@ -9,6 +9,15 @@ export type ProjectSummary = {
   likes: number
   comments: number
   participants: number
+  /** `null` when the caller is anonymous (or seed data without a user
+   * context); `true`/`false` once a valid access token is attached.
+   */
+  likedByMe?: boolean | null
+}
+
+export type ProjectLikeResponse = {
+  liked: boolean
+  likeCount: number
 }
 
 export type TeamMember = {
