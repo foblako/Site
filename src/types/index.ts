@@ -57,6 +57,17 @@ export type Vacancy = {
   tags: string[]
   responsibilities: string
   responsibilitiesList: string[]
+  /** `null` for anonymous callers; `true`/`false` once the access token
+   * identifies a user that has (or has not) submitted an application.
+   */
+  appliedByMe?: boolean | null
+}
+
+export type VacancyApplication = {
+  id: string
+  vacancyId: number
+  message: string
+  createdAt: string
 }
 
 export type Direction = {
