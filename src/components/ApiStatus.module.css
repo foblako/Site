@@ -1,0 +1,12 @@
+.status {
+  display: block;
+  width: 100%;
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.error {
+  color: #ff7676;
+}

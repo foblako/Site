@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import { VACANCIES, VACANCY_TAGS } from '../data/vacancies'
-import { VacancyCard } from '../components/VacancyCard'
+import { fetchVacancies, useApi } from '../api'
+import { ApiStatus } from '../components/ApiStatus'
 import { Footer } from '../components/Footer'
+import { VacancyCard } from '../components/VacancyCard'
+import { VACANCY_TAGS } from '../constants/filters'
 import styles from './Vacancies.module.css'
 
 export function Vacancies() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const { data: vacancies, loading, error } = useApi((signal) => fetchVacancies(signal), [])
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
@@ -16,7 +19,7 @@ export function Vacancies() {
     )
   }
 
-  const filteredVacancies = VACANCIES.filter(vacancy => {
+  const filteredVacancies = (vacancies ?? []).filter(vacancy => {
     const matchesSearch = vacancy.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          vacancy.description.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesTags = selectedTags.length === 0 ||
@@ -69,6 +72,13 @@ export function Vacancies() {
             ))}
           </div>
         </div>
+
+        <ApiStatus
+          loading={loading}
+          error={error}
+          empty={!loading && !error && filteredVacancies.length === 0}
+          emptyMessage="По заданным фильтрам ничего не найдено"
+        />
 
         <div className={styles.vacanciesGrid}>
           {filteredVacancies.map((vacancy, index) => (

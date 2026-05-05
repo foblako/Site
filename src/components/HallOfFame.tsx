@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { STARS } from '../data/hallOfFame'
+import { useEffect, useState } from 'react'
+import { fetchHallOfFame, useApi } from '../api'
 import styles from './HallOfFame.module.css'
 
 function mod(n: number, m: number) {
@@ -10,6 +10,8 @@ const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)'
 const DURATION = '0.5s'
 
 export function HallOfFame() {
+  const { data: stars } = useApi((signal) => fetchHallOfFame(signal), [])
+  const STARS = stars ?? []
   const [activeIndex, setActiveIndex] = useState(0)
   const [skipIds, setSkipIds] = useState<Set<number>>(new Set())
 
@@ -21,6 +23,7 @@ export function HallOfFame() {
   }, [skipIds])
 
   const slide = (direction: number) => {
+    if (STARS.length === 0) return
     const wrappingIdx = mod(activeIndex - direction * 2, STARS.length)
     setSkipIds(new Set([STARS[wrappingIdx].id]))
     setActiveIndex(prev => mod(prev + direction, STARS.length))
@@ -29,6 +32,7 @@ export function HallOfFame() {
   const getOffset = (starIndex: number): number => {
     let diff = starIndex - activeIndex
     const n = STARS.length
+    if (n === 0) return 0
     if (diff > n / 2) diff -= n
     if (diff < -n / 2) diff += n
     return diff

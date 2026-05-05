@@ -1,8 +1,10 @@
-import { VACANCIES } from '../data/vacancies'
+import { fetchVacancies, useApi } from '../api'
 import { VacancyCard } from './VacancyCard'
 import styles from './Vacancies.module.css'
 
 export function Vacancies() {
+  const { data: vacancies } = useApi((signal) => fetchVacancies(signal), [])
+
   return (
     <section className={styles.vacancies} aria-label="Открытые вакансии">
       <div className={styles.divider} />
@@ -15,7 +17,7 @@ export function Vacancies() {
         </div>
 
         <div className={styles.vacanciesGrid}>
-          {VACANCIES.map((vacancy, index) => (
+          {(vacancies ?? []).map((vacancy, index) => (
             <VacancyCard key={vacancy.id} {...vacancy} index={index} />
           ))}
         </div>

@@ -1,18 +1,29 @@
-import { useParams, useNavigate } from 'react-router-dom'
-import { PROJECT_DETAILS } from '../data/projects'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ApiError, fetchProject, useApi } from '../api'
+import { ApiStatus } from '../components/ApiStatus'
 import { Footer } from '../components/Footer'
 import styles from './Project.module.css'
 
 export function Project() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const project = id ? PROJECT_DETAILS[id] : undefined
+  const { data: project, loading, error } = useApi(
+    (signal) => {
+      if (!id) {
+        return Promise.reject(new ApiError(404, 'Проект не найден'))
+      }
+      return fetchProject(id, signal)
+    },
+    [id],
+  )
 
-  if (!project) {
+  if (loading || error || !project) {
     return (
       <section className={styles.notFound}>
-        <h1>Проект не найден</h1>
-        <button onClick={() => navigate(-1)}>Назад</button>
+        <ApiStatus loading={loading} error={error} empty={!loading && !error} emptyMessage="Проект не найден" />
+        {!loading && (
+          <button onClick={() => navigate(-1)}>Назад</button>
+        )}
       </section>
     )
   }
