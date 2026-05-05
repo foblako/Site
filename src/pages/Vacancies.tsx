@@ -82,7 +82,17 @@ export function Vacancies() {
 
         <div className={styles.vacanciesGrid}>
           {filteredVacancies.map((vacancy, index) => (
-            <VacancyCard key={vacancy.id} {...vacancy} index={index} />
+            <VacancyCard
+              key={vacancy.id}
+              id={vacancy.id}
+              title={vacancy.title}
+              description={vacancy.description}
+              tags={vacancy.tags}
+              responsibilities={vacancy.responsibilities}
+              responsibilitiesList={vacancy.responsibilitiesList}
+              appliedByMe={vacancy.appliedByMe}
+              index={index}
+            />
           ))}
         </div>
 

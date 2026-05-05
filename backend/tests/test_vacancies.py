@@ -15,6 +15,7 @@ async def test_list_vacancies(client: AsyncClient) -> None:
         "tags",
         "responsibilities",
         "responsibilitiesList",
+        "appliedByMe",
     }
 
 

@@ -13,7 +13,12 @@ export {
   deleteProjectComment,
   fetchProjectComments,
 } from './comments'
-export { fetchVacancies, fetchVacancy } from './vacancies'
+export {
+  applyToVacancy,
+  fetchVacancies,
+  fetchVacancy,
+  withdrawVacancyApplication,
+} from './vacancies'
 export { fetchDirections } from './directions'
 export { fetchHallOfFame } from './hallOfFame'
 export { fetchDefaultPortfolio, fetchMyPortfolio, updateMyPortfolio } from './portfolio'
