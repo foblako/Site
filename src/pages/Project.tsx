@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { ApiError, fetchProject, useApi } from '../api'
 import { ApiStatus } from '../components/ApiStatus'
+import { CommentsSection } from '../components/CommentsSection'
 import { Footer } from '../components/Footer'
 import { LikeButton } from '../components/LikeButton'
 import styles from './Project.module.css'
@@ -206,6 +207,12 @@ export function Project() {
                 </div>
               </div>
             )}
+
+            <CommentsSection
+              projectId={project.id}
+              headingClassName={styles.sectionTitle}
+              headingSlashClassName={styles.sectionSlash}
+            />
           </div>
 
           <div className={styles.rightColumn}>

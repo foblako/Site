@@ -8,6 +8,11 @@ export { useApi } from './useApi'
 export type { ApiState } from './useApi'
 
 export { fetchProject, fetchProjects, toggleProjectLike } from './projects'
+export {
+  createProjectComment,
+  deleteProjectComment,
+  fetchProjectComments,
+} from './comments'
 export { fetchVacancies, fetchVacancy } from './vacancies'
 export { fetchDirections } from './directions'
 export { fetchHallOfFame } from './hallOfFame'
