@@ -8,6 +8,7 @@ from .routers import (
     directions,
     hall_of_fame,
     portfolio,
+    project_comments,
     projects,
     vacancies,
 )
@@ -35,6 +36,7 @@ async def health() -> dict[str, str]:
 for router in (
     auth.router,
     projects.router,
+    project_comments.router,
     vacancies.router,
     directions.router,
     hall_of_fame.router,

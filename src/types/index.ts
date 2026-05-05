@@ -81,6 +81,18 @@ export type UserProfile = {
   contacts: { phone: string; email: string; website: string }
 }
 
+export type CommentAuthor = {
+  id: string
+  displayName: string
+}
+
+export type Comment = {
+  id: string
+  body: string
+  createdAt: string
+  author: CommentAuthor
+}
+
 export type AuthUser = {
   id: string
   email: string
