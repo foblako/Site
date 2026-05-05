@@ -13,3 +13,6 @@ venv/
 *.db
 *.db-journal
 media/
+
+# User-uploaded content (avatars, project screenshots) — dev-only storage.
+uploads/

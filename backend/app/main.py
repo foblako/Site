@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from .config import settings
 from .routers import (
@@ -10,6 +13,7 @@ from .routers import (
     portfolio,
     project_comments,
     projects,
+    uploads,
     vacancies,
 )
 
@@ -42,5 +46,14 @@ for router in (
     hall_of_fame.router,
     contacts.router,
     portfolio.router,
+    uploads.router,
 ):
     app.include_router(router, prefix="/api")
+
+
+# User-uploaded content (avatars, project screenshots) lives on disk and is
+# served as static files. The mount is created after the uploads dir exists
+# so StaticFiles' own sanity check passes even on a fresh clone.
+_uploads_path = Path(settings.uploads_dir).resolve()
+_uploads_path.mkdir(parents=True, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=_uploads_path), name="uploads")

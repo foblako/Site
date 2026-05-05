@@ -27,6 +27,10 @@ export type AuthContextValue = {
   login: (email: string, password: string) => Promise<void>
   register: (email: string, password: string, displayName: string) => Promise<AuthUser>
   logout: () => void
+  /** Replace the cached user object after a server-side update (e.g. avatar
+   * upload). Caller is responsible for passing a full, up-to-date user.
+   */
+  setUser: (user: AuthUser) => void
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -142,7 +146,7 @@ export function AuthProvider({ children }: Props) {
   )
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, status, login, register, logout }),
+    () => ({ user, status, login, register, logout, setUser }),
     [user, status, login, register, logout],
   )
 

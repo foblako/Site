@@ -553,3 +553,55 @@
   font-family: 'Helvetica', sans-serif;
   font-size: 0.875rem;
 }
+
+.avatarControls {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.avatarUploadButton {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 120ms ease, opacity 120ms ease;
+}
+
+.avatarUploadButton:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.avatarUploadButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.avatarDeleteButton {
+  padding: 0.25rem 0.75rem;
+  border: none;
+  border-radius: 0.35rem;
+  background: transparent;
+  color: #ea5657;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.avatarDeleteButton:hover {
+  opacity: 0.8;
+}
+
+.avatarError {
+  color: #ea5657;
+  font-size: 0.85rem;
+  max-width: 18ch;
+  text-align: center;
+}

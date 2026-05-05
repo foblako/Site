@@ -29,4 +29,5 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(255))
     display_name: Mapped[str] = mapped_column(String(128))
     role: Mapped[str] = mapped_column(String(32), default="user")
+    avatar_url: Mapped[str | None] = mapped_column(String(512), default=None, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now_utc)

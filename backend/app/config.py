@@ -27,6 +27,12 @@ class Settings(BaseSettings):
 
     debug: bool = False
 
+    # Absolute or relative path where uploaded files (avatars, project
+    # screenshots) are written. Served back as static content under `/uploads`.
+    uploads_dir: str = "./uploads"
+    # 5 MiB by default. Rejected files return 413 before any disk write.
+    max_upload_size_bytes: int = 5 * 1024 * 1024
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _parse_cors_origins(cls, value: Any) -> Any:

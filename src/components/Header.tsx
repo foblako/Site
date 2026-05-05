@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/useAuth'
 import styles from './Header.module.css'
 
+const API_BASE = (
+  (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8000'
+).replace(/\/$/, '')
+
 type HeaderProps = {
   showPortfolioTitle?: boolean
 }
@@ -84,7 +88,11 @@ export function Header({ showPortfolioTitle = false }: HeaderProps) {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
             >
-              <img className={styles.avatar} src="/avatar.svg" alt="User avatar" />
+              <img
+                className={styles.avatar}
+                src={user.avatarUrl !== null ? `${API_BASE}${user.avatarUrl}` : '/avatar.svg'}
+                alt="User avatar"
+              />
               <img className={styles.avatarStroke} src="/Vector 3.svg" alt="" aria-hidden="true" />
             </button>
             {menuOpen && (
