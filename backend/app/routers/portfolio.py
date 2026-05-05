@@ -41,9 +41,7 @@ async def _load_default(session: AsyncSession) -> Profile:
     return profile
 
 
-async def _get_or_create_user_profile(
-    session: AsyncSession, user: User
-) -> UserProfileModel:
+async def _get_or_create_user_profile(session: AsyncSession, user: User) -> UserProfileModel:
     existing = await session.get(UserProfileModel, user.id)
     if existing is not None:
         return existing

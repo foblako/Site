@@ -40,9 +40,7 @@ async def test_me_portfolio_requires_auth(client: AsyncClient) -> None:
 async def test_me_portfolio_autocreates_from_template(client: AsyncClient) -> None:
     access = await _login(client)
 
-    response = await client.get(
-        "/api/portfolio/me", headers={"Authorization": f"Bearer {access}"}
-    )
+    response = await client.get("/api/portfolio/me", headers={"Authorization": f"Bearer {access}"})
     assert response.status_code == 200, response.text
     payload = response.json()
     # Name seeded from user's display_name, not the template placeholder.
@@ -66,9 +64,7 @@ async def test_me_portfolio_patch_updates_name(client: AsyncClient) -> None:
     assert patch.json()["name"] == "Alice the Great"
 
     # Verify it persists on a fresh GET.
-    again = await client.get(
-        "/api/portfolio/me", headers={"Authorization": f"Bearer {access}"}
-    )
+    again = await client.get("/api/portfolio/me", headers={"Authorization": f"Bearer {access}"})
     assert again.json()["name"] == "Alice the Great"
 
 
@@ -76,9 +72,7 @@ async def test_me_portfolio_patch_is_partial(client: AsyncClient) -> None:
     access = await _login(client)
 
     # Initial GET captures the template-cloned skills/goals.
-    initial = await client.get(
-        "/api/portfolio/me", headers={"Authorization": f"Bearer {access}"}
-    )
+    initial = await client.get("/api/portfolio/me", headers={"Authorization": f"Bearer {access}"})
     original_skills = initial.json()["skills"]
 
     # Patch only about; skills must remain untouched.
@@ -125,15 +119,11 @@ async def test_me_portfolio_patch_isolation_between_users(client: AsyncClient) -
     )
     access_b = login_b.json()["accessToken"]
 
-    bob = await client.get(
-        "/api/portfolio/me", headers={"Authorization": f"Bearer {access_b}"}
-    )
+    bob = await client.get("/api/portfolio/me", headers={"Authorization": f"Bearer {access_b}"})
     # Bob's profile is seeded fresh from the template with Bob's name.
     assert bob.json()["name"] == "Bob"
 
-    alice = await client.get(
-        "/api/portfolio/me", headers={"Authorization": f"Bearer {access_a}"}
-    )
+    alice = await client.get("/api/portfolio/me", headers={"Authorization": f"Bearer {access_a}"})
     assert alice.json()["name"] == "Alice edited"
 
 
