@@ -25,3 +25,19 @@ class UserProfile(CamelModel):
     goals: list[str]
     works: list[ProfileWork]
     contacts: ProfileContacts
+
+
+class UserProfileUpdate(CamelModel):
+    """Partial update — every field is optional. Missing fields stay as-is.
+
+    `skills` and `goals` arrays replace in full; we do not try to merge item
+    by item because arbitrary insertions/removals don't have a natural key.
+    """
+
+    name: str | None = None
+    info: list[ProfileInfo] | None = None
+    about: list[str] | None = None
+    skills: list[str] | None = None
+    goals: list[str] | None = None
+    works: list[ProfileWork] | None = None
+    contacts: ProfileContacts | None = None
