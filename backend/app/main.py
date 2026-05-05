@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .config import settings
 from .routers import (
+    admin,
     auth,
     contacts,
     directions,
@@ -47,6 +48,7 @@ for router in (
     contacts.router,
     portfolio.router,
     uploads.router,
+    admin.router,
 ):
     app.include_router(router, prefix="/api")
 

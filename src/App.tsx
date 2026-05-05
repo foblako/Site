@@ -8,6 +8,7 @@ import { Directions } from './components/Directions'
 import { HallOfFame } from './components/HallOfFame'
 import { Vacancies as VacanciesSection } from './components/Vacancies'
 import { Contacts } from './components/Contacts'
+import { Admin } from './pages/Admin'
 import { Login } from './pages/Login'
 import { Portfolio } from './pages/Portfolio'
 import { Project } from './pages/Project'
@@ -50,6 +51,7 @@ function App() {
           <Route path="/project/:id" element={<><Header showPortfolioTitle /><Project /></>} />
           <Route path="/projects" element={<><Header showPortfolioTitle /><Projects /></>} />
           <Route path="/login" element={<><Header showPortfolioTitle /><Login /></>} />
+          <Route path="/admin" element={<><Header showPortfolioTitle /><Admin /></>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
