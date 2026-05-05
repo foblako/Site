@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { fetchProjects, useApi } from '../api'
+import { LikeButton } from './LikeButton'
 import styles from './Projects.module.css'
 
 export function Projects() {
@@ -54,12 +55,12 @@ export function Projects() {
 
                 <div className={styles.cardStats}>
                   <span className={styles.statItem}>
-                    <img
-                      src="/likeActive.svg"
-                      alt="Likes"
-                      className={styles.statIcon}
+                    <LikeButton
+                      projectId={project.id}
+                      likes={project.likes}
+                      likedByMe={project.likedByMe}
+                      iconClassName={styles.statIcon}
                     />
-                    {project.likes}
                   </span>
                   <span className={styles.statItem}>
                     <img

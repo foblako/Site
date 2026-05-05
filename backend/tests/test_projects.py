@@ -20,6 +20,7 @@ async def test_list_projects_returns_summaries_in_camel_case(client: AsyncClient
         "likes",
         "comments",
         "participants",
+        "likedByMe",
     }
 
 

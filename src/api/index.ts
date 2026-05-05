@@ -7,7 +7,7 @@ export {
 export { useApi } from './useApi'
 export type { ApiState } from './useApi'
 
-export { fetchProject, fetchProjects } from './projects'
+export { fetchProject, fetchProjects, toggleProjectLike } from './projects'
 export { fetchVacancies, fetchVacancy } from './vacancies'
 export { fetchDirections } from './directions'
 export { fetchHallOfFame } from './hallOfFame'

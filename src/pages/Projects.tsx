@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { fetchProjects, useApi } from '../api'
 import { ApiStatus } from '../components/ApiStatus'
 import { Footer } from '../components/Footer'
+import { LikeButton } from '../components/LikeButton'
 import { PROJECT_TAGS } from '../constants/filters'
 import styles from './Projects.module.css'
 
@@ -120,12 +121,12 @@ export function Projects() {
 
                     <div className={styles.cardStats}>
                       <span className={styles.statItem}>
-                        <img
-                          src="/likeActive.svg"
-                          alt="Likes"
-                          className={styles.statIcon}
+                        <LikeButton
+                          projectId={project.id}
+                          likes={project.likes}
+                          likedByMe={project.likedByMe}
+                          iconClassName={styles.statIcon}
                         />
-                        {project.likes}
                       </span>
                       <span className={styles.statItem}>
                         <img

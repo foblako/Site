@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ApiError, fetchProject, useApi } from '../api'
 import { ApiStatus } from '../components/ApiStatus'
 import { Footer } from '../components/Footer'
+import { LikeButton } from '../components/LikeButton'
 import styles from './Project.module.css'
 
 export function Project() {
@@ -39,8 +40,12 @@ export function Project() {
             </div>
             <div className={styles.statsSection}>
               <div className={styles.statItem}>
-                <img src="/likeActive.svg" alt="Likes" className={styles.statIcon} />
-                <span>{project.likes}</span>
+                <LikeButton
+                  projectId={project.id}
+                  likes={project.likes}
+                  likedByMe={project.likedByMe}
+                  iconClassName={styles.statIcon}
+                />
               </div>
               <div className={styles.statItem}>
                 <img src="/obsuzdenie.svg" alt="Comments" className={styles.statIcon} />
